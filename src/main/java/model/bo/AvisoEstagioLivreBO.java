@@ -2,7 +2,10 @@ package model.bo;
 
 import java.util.ArrayList;
 
+import model.dao.AvisoCoordenacaoDAO;
 import model.dao.AvisoEstagioDAO;
+import model.dto.AvisoCoordenacaoDTO;
+import model.dto.AvisoEstagioDTO;
 import model.vo.AvisoEstagioVO;
 
 public class AvisoEstagioLivreBO {
@@ -65,5 +68,14 @@ public class AvisoEstagioLivreBO {
 			System.out.println("\nLista de Avisos do Estagio está vazia.");
 		}
 		return avisosEstagioVO;
+	}
+
+	public ArrayList<AvisoEstagioDTO> consultarRelatorioAvisosEstagioBO() {
+		AvisoEstagioDAO avisoEstagioDAO = new AvisoEstagioDAO();
+		ArrayList<AvisoEstagioDTO> avisoEstagioDTO = avisoEstagioDAO.consultarRelatorioAvisoEstagioDAO();
+		if(avisoEstagioDTO.isEmpty()){
+			System.out.println("\nLista de Avisos de Estágio está vazia.");
+		}
+		return avisoEstagioDTO;
 	}
 }

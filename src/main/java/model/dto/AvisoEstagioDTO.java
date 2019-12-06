@@ -46,4 +46,13 @@ public class AvisoEstagioDTO{
 		this.telefone = telefone;
 	}
 
+	public void imprimir() {
+		System.out.printf("\n%8d   %8d   %-15s   %-15s   %-15s  \n", 
+				this.getNomeEmpresa(), 
+				this.getCargo(), 
+				this.getJornada(), 
+				this.getRemuneracao(), 
+				this.getTelefone());
+	}
+
 }

@@ -4,7 +4,9 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import controller.ControladoraAvisoCoordenacao;
+import controller.ControladoraAvisoEstagio;
 import model.dto.AvisoCoordenacaoDTO;
+import model.dto.AvisoEstagioDTO;
 import model.vo.UsuarioVO;
 
 public class MenuRelatorio {
@@ -36,7 +38,7 @@ public class MenuRelatorio {
 					break;
 				}
 				case OPCAO_MENU_RELATORIO_AVISO_COORDENACAO: {
-					this.consultarRelatorioAvisoCoordenacao(usuarioVO);
+					this.consultarRelatorioAvisoCoordenacao();
 					break;
 				}
 				default: {
@@ -72,8 +74,13 @@ public class MenuRelatorio {
 	}
 
 	private void consultarRelatorioAvisoEstagio() {
-		// TODO Auto-generated method stub
-		
+		ControladoraAvisoEstagio controladoraAvisoEstagio = new ControladoraAvisoEstagio();
+		ArrayList<AvisoEstagioDTO> listaAvisoEstagioDTO = controladoraAvisoEstagio.consultarRelatorioAvisosEstagioController();
+		System.out.print("\n--------- RESULTADO DO RELATÓRIO ---------");
+		System.out.printf("\n%8s   %15s   %-50s   %-15s   %-15s  \n", "ID AVISO", "ID AVISO COORD.", "DESCRIÇÃO", "DATA CADASTRO", "DATA EXPIRAÇÃO");
+		for (int i = 0; i < listaAvisoEstagioDTO.size(); i++) {
+			listaAvisoEstagioDTO.get(i).imprimir();
+		}
 	}
 
 	private void consultarRelatorioUsuario(UsuarioVO usuarioVO) {

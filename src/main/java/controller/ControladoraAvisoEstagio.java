@@ -2,7 +2,9 @@ package controller;
 
 import java.util.ArrayList;
 
+import model.bo.AvisoCoordenacaoBO;
 import model.bo.AvisoEstagioLivreBO;
+import model.dto.AvisoEstagioDTO;
 import model.vo.AvisoEstagioVO;
 
 public class ControladoraAvisoEstagio {
@@ -29,5 +31,10 @@ public class ControladoraAvisoEstagio {
 	public AvisoEstagioVO consultarAvisoEstagioLivreController(AvisoEstagioVO avisoEstagioVO) {
 		AvisoEstagioLivreBO avisoEstagioLivreBO = new AvisoEstagioLivreBO();
 		return avisoEstagioLivreBO.consultarAvisoEstagioLivreBO(avisoEstagioVO);
+	}
+
+	public ArrayList<AvisoEstagioDTO> consultarRelatorioAvisosEstagioController() {
+		AvisoEstagioLivreBO avisoEstagioLivreBO = new AvisoEstagioLivreBO();
+		return avisoEstagioLivreBO.consultarRelatorioAvisosEstagioBO();
 	}
 }

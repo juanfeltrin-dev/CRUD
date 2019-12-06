@@ -8,6 +8,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
+import model.dto.AvisoEstagioDTO;
 import model.vo.AvisoEstagioVO;
 import model.vo.AvisoVO;
 
@@ -89,7 +90,7 @@ DateTimeFormatter dataFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
 
 	public int atualizarAvisoEstagioDAO(AvisoEstagioVO avisoEstagioVO) {
-		int atualizado = this.atualizarAvisoEstagioDAO(avisoEstagioVO);
+		boolean atualizado = this.atualizarAvisoDAO(avisoEstagioVO);
 		int resultado = 0;
 		if(atualizado) {
 			Connection conn = Banco.getConnection();
@@ -108,6 +109,29 @@ DateTimeFormatter dataFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 			}
 		} 
 		return resultado;
+	}
+	public boolean atualizarAvisoDAO(AvisoVO avisoVO) {
+		Connection conn = Banco.getConnection();
+		Statement stmt = Banco.getStatement(conn);
+		boolean atualizado = false;
+		int resultado = 0;
+		String query = "UPDATE aviso SET idusuario = " + avisoVO.getIdUsuario() + ", " 
+					+ " datacadastro = '" + avisoVO.getDataCadastro() + "', " 
+					+ " dataexpiracao = '" + avisoVO.getDataExpiracao() + "' " 
+					+ " WHERE idaviso = " + avisoVO.getIdAviso();
+		try {
+			resultado = stmt.executeUpdate(query);
+			if(resultado == 1) {
+				atualizado = true;
+			}
+		} catch (SQLException e) {
+			System.out.println("Erro ao executar a Query de Atualização do Aviso.");
+			System.out.println("Erro: " + e.getMessage());
+		} finally {
+			Banco.closeStatement(stmt);
+			Banco.closeConnection(conn);
+		}
+		return atualizado;
 	}
 
 
@@ -195,6 +219,12 @@ DateTimeFormatter dataFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 			Banco.closeConnection(conn);
 		}
 		return avisoEstagio;
+	}
+
+
+	public ArrayList<AvisoEstagioDTO> consultarRelatorioAvisoEstagioDAO() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 
