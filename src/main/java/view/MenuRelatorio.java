@@ -61,7 +61,7 @@ public class MenuRelatorio {
 		return Integer.parseInt(teclado.nextLine());
 	}
 
-	private void consultarRelatorioAvisoCoordenacao(UsuarioVO usuarioVO) {
+	private void consultarRelatorioAvisoCoordenacao() {
 		ControladoraAvisoCoordenacao controladoraAvisoCoordenacao = new ControladoraAvisoCoordenacao();
 		ArrayList<AvisoCoordenacaoDTO> listaAvisoCoordenacaoDTO = controladoraAvisoCoordenacao.consultarRelatorioAvisosCoordenacaoController();
 		System.out.print("\n--------- RESULTADO DO RELATÓRIO ---------");
@@ -69,8 +69,6 @@ public class MenuRelatorio {
 		for (int i = 0; i < listaAvisoCoordenacaoDTO.size(); i++) {
 			listaAvisoCoordenacaoDTO.get(i).imprimir();
 		}
-		
-		
 	}
 
 	private void consultarRelatorioAvisoEstagio() {
