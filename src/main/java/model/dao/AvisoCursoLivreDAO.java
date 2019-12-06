@@ -139,11 +139,14 @@ public class AvisoCursoLivreDAO extends AvisoDAO {
 			while(resultado.next()){
 				AvisoCursoLivreVO avisoCursoLivreVO = new AvisoCursoLivreVO();
 				avisoCursoLivreVO.setIdAviso(Integer.parseInt(resultado.getString(1)));
-				avisoCursoLivreVO.setIdAvisoCoordenacao(Integer.parseInt(resultado.getString(2)));
+				avisoCursoLivreVO.setIdAvisoCursoLivre(Integer.parseInt(resultado.getString(2)));
 				avisoCursoLivreVO.setIdUsuario(Integer.parseInt(resultado.getString(3)));
-				avisoCursoLivreVO.setDescricao(resultado.getString(4));
-				avisoCursoLivreVO.setDataCadastro(LocalDate.parse(resultado.getString(5), dataFormatter));
-				avisoCursoLivreVO.setDataExpiracao(LocalDate.parse(resultado.getString(6), dataFormatter));
+				avisoCursoLivreVO.setNome(resultado.getString(4));
+				avisoCursoLivreVO.setPublicoAlvo(LocalDate.parse(resultado.getString(5), dataFormatter));
+				avisoCursoLivreVO.setRequisito(LocalDate.parse(resultado.getString(6), dataFormatter));
+				avisoCursoLivreVO.setRequisito(LocalDate.parse(resultado.getString(6), dataFormatter));
+				avisoCursoLivreVO.setDataCurso(LocalDate.parse(resultado.getString(6), dataFormatter));
+				avisoCursoLivreVO.setValor(Integer.parseInt(resultado.getString(6));
 				avisosCursoLivreVO.add(avisoCursoLivreVO);
 			}
 		} catch (SQLException e){

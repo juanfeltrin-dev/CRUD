@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 public class AvisoCursoLivreVO extends AvisoVO {
+	
 	DateTimeFormatter formataDate = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 	
 	private int idAvisoCursoLivre;
