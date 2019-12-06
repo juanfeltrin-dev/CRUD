@@ -5,6 +5,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 import model.vo.AvisoCoordenacaoVO;
@@ -12,6 +13,8 @@ import model.vo.AvisoCursoLivreVO;
 
 public class AvisoCursoLivreDAO extends AvisoDAO {
 
+	DateTimeFormatter dataFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+	
 	public boolean existeRegistroAvisoCursoLivreDAO(AvisoCursoLivreVO avisoCursoLivreVO) {
 		Connection conn = Banco.getConnection();
 		Statement stmt = Banco.getStatement(conn);
@@ -142,11 +145,11 @@ public class AvisoCursoLivreDAO extends AvisoDAO {
 				avisoCursoLivreVO.setIdAvisoCursoLivre(Integer.parseInt(resultado.getString(2)));
 				avisoCursoLivreVO.setIdUsuario(Integer.parseInt(resultado.getString(3)));
 				avisoCursoLivreVO.setNome(resultado.getString(4));
-				avisoCursoLivreVO.setPublicoAlvo(LocalDate.parse(resultado.getString(5), dataFormatter));
-				avisoCursoLivreVO.setRequisito(LocalDate.parse(resultado.getString(6), dataFormatter));
-				avisoCursoLivreVO.setRequisito(LocalDate.parse(resultado.getString(6), dataFormatter));
-				avisoCursoLivreVO.setDataCurso(LocalDate.parse(resultado.getString(6), dataFormatter));
-				avisoCursoLivreVO.setValor(Integer.parseInt(resultado.getString(6));
+				avisoCursoLivreVO.setPublicoAlvo(resultado.getString(5));
+				avisoCursoLivreVO.setRequisito(resultado.getString(6));
+				avisoCursoLivreVO.setRequisito(resultado.getString(7));
+				avisoCursoLivreVO.setDataCurso(LocalDate.parse(resultado.getString(8), dataFormatter));
+				avisoCursoLivreVO.setValor(Integer.parseInt(resultado.getString(9)));
 				avisosCursoLivreVO.add(avisoCursoLivreVO);
 			}
 		} catch (SQLException e){
@@ -174,11 +177,14 @@ public class AvisoCursoLivreDAO extends AvisoDAO {
 			resultado = stmt.executeQuery(query);
 			if(resultado.next()){
 				avisoCursoLivre.setIdAviso(Integer.parseInt(resultado.getString(1)));
-				avisoCursoLivre.setIdAvisoCoordenacao(Integer.parseInt(resultado.getString(2)));
+				avisoCursoLivre.setIdAvisoCursoLivre(Integer.parseInt(resultado.getString(2)));
 				avisoCursoLivre.setIdUsuario(Integer.parseInt(resultado.getString(3)));
-				avisoCursoLivre.setDescricao(resultado.getString(4));
-				avisoCursoLivre.setDataCadastro(LocalDate.parse(resultado.getString(5), dataFormatter));
-				avisoCursoLivre.setDataExpiracao(LocalDate.parse(resultado.getString(6), dataFormatter));
+				avisoCursoLivre.setNome(resultado.getString(4));
+				avisoCursoLivreVO.setPublicoAlvo(resultado.getString(5));
+				avisoCursoLivreVO.setRequisito(resultado.getString(6));
+				avisoCursoLivreVO.setRequisito(resultado.getString(7));
+				avisoCursoLivreVO.setDataCurso(LocalDate.parse(resultado.getString(8), dataFormatter));
+				avisoCursoLivreVO.setValor(Integer.parseInt(resultado.getString(9)));
 			}
 		} catch (SQLException e){
 			System.out.println("Erro ao executar a Query de Consulta do Aviso da Coordenação.");
