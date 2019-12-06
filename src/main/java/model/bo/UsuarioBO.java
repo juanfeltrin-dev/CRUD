@@ -2,7 +2,10 @@ package model.bo;
 
 import java.util.ArrayList;
 
+import model.dao.AvisoEstagioDAO;
 import model.dao.UsuarioDAO;
+import model.dto.AvisoEstagioDTO;
+import model.dto.UsuarioDTO;
 import model.vo.TipoUsuarioVO;
 import model.vo.UsuarioVO;
 
@@ -76,6 +79,15 @@ public class UsuarioBO {
 	public ArrayList<TipoUsuarioVO> consultarTipoUsuarioBO() {
 		UsuarioDAO usuarioDAO = new UsuarioDAO();
 		return usuarioDAO.consultarTipoUsuarioDAO();
+	}
+
+	public ArrayList<UsuarioDTO> consultarRelatorioUsuariosBO() {
+		UsuarioDAO usuarioDAO = new UsuarioDAO();
+		ArrayList<UsuarioDTO> usuarioDTO = UsuarioDAO.consultarRelatorioUsuariosDAO();
+		if(usuarioDTO.isEmpty()){
+			System.out.println("\nLista de Avisos de Estágio está vazia.");
+		}
+		return usuarioDTO;
 	}
 
 }

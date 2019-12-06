@@ -27,13 +27,13 @@ public class MenuEstagio {
 	private static final int COORDENADOR = 2;
 	private static final int SECRETARIA = 3;
 	
-	public void apresentarMenuEstagio(AvisoEstagioVO avisoEstagioVO) {
+	public void apresentarMenuEstagio(UsuarioVO usuarioVO) {
 		
-			int opcao = this.apresentarOpcoesMenu(avisoEstagioVO.getIdUsuario());
+			int opcao = this.apresentarOpcoesMenu(usuarioVO.getIdUsuario());
 			while (opcao != OPCAO_MENU_AVISO_ESTAGIO_LIVRE_SAIR) {
 				switch (opcao) {
 					case OPCAO_MENU_CADASTRAR_AVISO_ESTAGIO_LIVRE: {
-						this.cadastrarAvisoEstagioLivre(avisoEstagioVO);
+						this.cadastrarAvisoEstagioLivre(usuarioVO);
 						break;
 					}
 					case OPCAO_MENU_CONSULTAR_AVISO_ESTAGIO_LIVRE: {
@@ -41,7 +41,7 @@ public class MenuEstagio {
 						break;
 					}
 					case OPCAO_MENU_ATUALIZAR_AVISO_ESTAGIO_LIVRE: {
-						this.atualizarAvisoEstagioLivre(avisoEstagioVO);
+						this.atualizarAvisoEstagioLivre(usuarioVO);
 						break;
 					}
 					case OPCAO_MENU_EXCLUIR_AVISO_ESTAGIO_LIVRE: {
@@ -52,28 +52,28 @@ public class MenuEstagio {
 						System.out.println("\nOpção Inválida");
 					}
 				}
-				opcao = this.apresentarOpcoesMenu(avisoEstagioVO.getIdUsuario());
+				opcao = this.apresentarOpcoesMenu(usuarioVO.getIdUsuario());
 			}
 		}
 
-		private void cadastrarAvisoEstagioLivre(AvisoEstagioVO avisoEstagioVO) {
+		private void cadastrarAvisoEstagioLivre(UsuarioVO usuarioVO) {
 			AvisoEstagioVO avisoEstagioLivreVO = new AvisoEstagioVO();
-			avisoEstagioVO.setIdUsuario(AvisoEstagioVO.getIdUsuario());
+			avisoEstagioLivreVO.setIdUsuario(usuarioVO.getIdUsuario());
 			System.out.print("\nDigite o Aviso do estágio: ");
-			avisoEstagioVO.setNome(teclado.nextLine());
+			avisoEstagioLivreVO.setEmpresa(teclado.nextLine());
 			System.out.print("\nDigite o Aviso do estágio: ");
-			avisoEstagioVO.setPublicoAlvo(teclado.nextLine());
+			avisoEstagioLivreVO.setTelefone(teclado.nextLine());
 			System.out.print("Digite a data de cadastro do Aviso do estágio: ");
-			avisoEstagioVO.setDataExpiracao(teclado.nextLine());
+			avisoEstagioLivreVO.setEmail(teclado.nextLine());
 			System.out.print("Digite a data de expiração do Aviso do estágio: ");
-			avisoEstagioVO.setCargo(teclado.nextLine());
+			avisoEstagioLivreVO.setCargo(teclado.nextLine());
 			System.out.print("Digite a data de cadastro do Aviso do estágio: ");
-			avisoEstagioVO.setDataExpiracao(LocalDate.parse(teclado.nextLine(), dataFormatter));
+			avisoEstagioLivreVO.setJornada(Integer.parseInt(teclado.nextLine()));
 			System.out.print("Digite a data de expiração do Aviso do estágio: ");
-			avisoEstagioVO.setValor(Double.parseDouble(teclado.nextLine()));
+			avisoEstagioLivreVO.setRemuneracao(Double.parseDouble(teclado.nextLine()));
 			
 			ControladoraAvisoEstagio controladoraAvisoEstagio = new ControladoraAvisoEstagio();
-			controladoraAvisoEstagio.cadastrarAvisoEstagioLivreController(avisoEstagioVO);
+			controladoraAvisoEstagio.cadastrarAvisoEstagioLivreController(avisoEstagioLivreVO);
 			
 		
 	}
@@ -106,21 +106,21 @@ public class MenuEstagio {
 			
 		}
 
-		private void atualizarAvisoEstagioLivre(AvisoEstagioVO avisoEstagioVO) {
+		private void atualizarAvisoEstagioLivre(UsuarioVO usuarioVO) {
 			AvisoEstagioVO avisoEstagioLivreVO = new AvisoEstagioVO();
-			avisoEstagioVO.setIdUsuario(avisoEstagioVO.getIdUsuario());
+			avisoEstagioLivreVO.setIdUsuario(usuarioVO.getIdUsuario());
 			System.out.print("\nDigite o Aviso do estágio: ");
-			avisoEstagioVO.setIdAvisoEstagio(teclado.nextInt());
-			System.out.print("\nDigite a empresa a tualizar do estágio: ");
-			avisoEstagioVO.setEmpresa(teclado.nextLine());
+			avisoEstagioLivreVO.setEmpresa(teclado.nextLine());
+			System.out.print("\nDigite o Aviso do estágio: ");
+			avisoEstagioLivreVO.setTelefone(teclado.nextLine());
 			System.out.print("Digite a data de cadastro do Aviso do estágio: ");
-			avisoEstagioVO.setDataCadastro(LocalDate.parse(teclado.nextLine(), dataFormatter));
+			avisoEstagioLivreVO.setEmail(teclado.nextLine());
 			System.out.print("Digite a data de expiração do Aviso do estágio: ");
-			avisoEstagioVO.setCargo(teclado.nextLine());
+			avisoEstagioLivreVO.setCargo(teclado.nextLine());
 			System.out.print("Digite a data de cadastro do Aviso do estágio: ");
-			avisoEstagioVO.setDataExpiracao(LocalDate.parse(teclado.nextLine(), dataFormatter));
-			System.out.print("Digite o valor da remumeracao do estágio: ");
-			avisoEstagioVO.setRemuneracao(Double.parseDouble(teclado.nextLine()));
+			avisoEstagioLivreVO.setJornada(Integer.parseInt(teclado.nextLine()));
+			System.out.print("Digite a data de expiração do Aviso do estágio: ");
+			avisoEstagioLivreVO.setRemuneracao(Double.parseDouble(teclado.nextLine()));
 
 			ControladoraAvisoEstagio controladoraAvisoEstagioLivre = new ControladoraAvisoEstagio();
 			controladoraAvisoEstagioLivre.atualizarAvisoEstagioLivreController(avisoEstagioLivreVO);

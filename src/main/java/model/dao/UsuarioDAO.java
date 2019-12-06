@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
+import model.dto.UsuarioDTO;
 import model.vo.TipoUsuarioVO;
 import model.vo.UsuarioVO;
 
@@ -211,6 +212,11 @@ public class UsuarioDAO {
 	            Banco.closeConnection(conn);
 	        }
 		return lista;
+	}
+
+	public static ArrayList<UsuarioDTO> consultarRelatorioUsuariosDAO() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
