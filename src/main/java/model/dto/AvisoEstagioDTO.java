@@ -15,6 +15,11 @@ public class AvisoEstagioDTO{
 		this.remuneracao = remuneracao;
 		this.telefone = telefone;
 	}
+   
+	public AvisoEstagioDTO() {
+	super();
+	}
+
 	public String getNomeEmpresa() {
 		return empresa;
 	}

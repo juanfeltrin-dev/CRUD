@@ -8,6 +8,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
+import model.dto.AvisoCoordenacaoDTO;
 import model.dto.AvisoEstagioDTO;
 import model.vo.AvisoEstagioVO;
 import model.vo.AvisoVO;
@@ -223,9 +224,31 @@ DateTimeFormatter dataFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
 
 	public ArrayList<AvisoEstagioDTO> consultarRelatorioAvisoEstagioDAO() {
-		// TODO Auto-generated method stub
-		return null;
+		Connection conn = Banco.getConnection();
+		Statement stmt = Banco.getStatement(conn);
+		ResultSet resultado = null;
+		ArrayList<AvisoEstagioDTO> avisosEstagioDTO = new ArrayList<AvisoEstagioDTO>();
+		String query = "SELECT avc.idavisocoordenacao, avc.empressa, avc.cargo, avc.jornada, avc.remuneracao, avc.telefone "
+				+ " FROM avisocoordenacao avc";
+		try{
+			resultado = stmt.executeQuery(query);
+			while(resultado.next()){
+				AvisoEstagioDTO avisoEstagioDTO = new AvisoEstagioDTO();
+				avisoEstagioDTO.setNomeEmpresa(resultado.getString(1));
+				avisoEstagioDTO.setCargo(resultado.getString(2));
+				avisoEstagioDTO.setJornada(resultado.getString(3));
+				avisoEstagioDTO.setRemuneracao(Double.parseDouble(resultado.getString(4)));
+				avisoEstagioDTO.setTelefone(resultado.getString(5));
+				avisosEstagioDTO.add(avisoEstagioDTO);
+			}
+		} catch (SQLException e){
+			System.out.println("Erro ao executar a Query de Consulta dos Avisos da Coordenação.");
+			System.out.println("Erro: " + e.getMessage());
+		} finally {
+			Banco.closeResultSet(resultado);
+			Banco.closeStatement(stmt);
+			Banco.closeConnection(conn);
+		}
+		return avisosEstagioDTO;
 	}
-
-
 }
