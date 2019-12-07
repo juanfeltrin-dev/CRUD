@@ -64,7 +64,7 @@ public class AvisoEstagioLivreBO {
 	public ArrayList<AvisoEstagioVO> consultarTodosAvisosEstagioLivreBO() {
 		AvisoEstagioDAO avisoEstagioDAO = new AvisoEstagioDAO();
 		ArrayList<AvisoEstagioVO> avisosEstagioVO = avisoEstagioDAO.consultarTodosAvisoEstagioDAO();
-		if(AvisoEstagioVO.isEmpty()){
+		if(avisosEstagioVO.isEmpty()){
 			System.out.println("\nLista de Avisos do Estagio está vazia.");
 		}
 		return avisosEstagioVO;

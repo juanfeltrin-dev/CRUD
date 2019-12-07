@@ -8,10 +8,8 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
-import model.dto.AvisoCoordenacaoDTO;
 import model.dto.AvisoEstagioDTO;
 import model.vo.AvisoEstagioVO;
-import model.vo.AvisoVO;
 
 public class AvisoEstagioDAO extends AvisoDAO {
 DateTimeFormatter dataFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
@@ -21,9 +19,9 @@ DateTimeFormatter dataFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 		Connection conn = Banco.getConnection();
 		Statement stmt = (Statement) Banco.getStatement(conn);
 		ResultSet resultado = null;
-		String query = "SELECT avc.cargo FROM avisoestagio avc, aviso av "
-				+ "WHERE avc.idaviso = av.idaviso "
-				+ "and avc.cargo like '" + avisoEstagioVO.getCargo().toUpperCase() + "' "
+		String query = "SELECT ave.cargo FROM avisoestagio ave, aviso av "
+				+ "WHERE ave.idaviso = av.idaviso "
+				+ "and ave.cargo like '" + avisoEstagioVO.getCargo().toUpperCase() + "' "
 				+ "and av.dataexpiracao >= " + avisoEstagioVO.getDataExpiracao();
 		try {
 			resultado = stmt.executeQuery(query);
@@ -31,7 +29,7 @@ DateTimeFormatter dataFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 				return true;
 			}
 		} catch (SQLException e) {
-			System.out.println("Erro ao executar a Query que verifica existência de estágio da Estágio.");
+			System.out.println("Erro ao executar a Query que verifica existência do aviso de Estágio.");
 			System.out.println("Erro: " + e.getMessage());
 			return false;
 		} finally {
@@ -47,17 +45,17 @@ DateTimeFormatter dataFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 		Connection conn = Banco.getConnection();
 		Statement stmt = (Statement) Banco.getStatement(conn);
 		ResultSet resultado = null;
-		String query = "SELECT avc.idavisoestagio, av.idaviso FROM avisoestagio avc, aviso av "
-				+ "WHERE avc.idaviso = av.idaviso "
+		String query = "SELECT ave.idavisoestagio, av.idaviso FROM avisoestagio ave, aviso av "
+				+ "WHERE ave.idaviso = av.idaviso "
 				+ " and av.idaviso = " + avisoEstagioVO.getIdAviso()
-				+ " and avc.idavisoestagio = " + avisoEstagioVO.getIdAvisoEstagio();
+				+ " and ave.idavisoestagio = " + avisoEstagioVO.getIdAvisoEstagio();
 		try {
 			resultado = stmt.executeQuery(query);
 			if (resultado.next()){
 				return true;
 			}
 		} catch (SQLException e) {
-			System.out.println("Erro ao executar a Query que verifica existência de aviso estagio por ID.");
+			System.out.println("Erro ao executar a Query que verifica existência do aviso de Estágio por ID.");
 			System.out.println("Erro: " + e.getMessage());
 			return false;
 		} finally {
@@ -85,7 +83,7 @@ DateTimeFormatter dataFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 		try {
 			resultado = stmt.executeUpdate(query);
 		} catch (SQLException e) {
-			System.out.println("Erro ao executar a Query de Cadastro do Aviso da Estágio.");
+			System.out.println("Erro ao executar a Query de Cadastro do Aviso de Estágio.");
 			System.out.println("Erro: " + e.getMessage());
 		} finally {
 			Banco.closeStatement(stmt);
@@ -102,13 +100,9 @@ DateTimeFormatter dataFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 			Connection conn = Banco.getConnection();
 			Statement stmt = (Statement) Banco.getStatement(conn);
 			String query = "UPDATE avisoestagio SET idaviso = " + avisoEstagioVO.getIdAviso() 
-						+ ", empresa = '" + avisoEstagioVO.getEmpresa()
-						+ "', telefone = '" + avisoEstagioVO.getTelefone()
-						+ "', email = '" + avisoEstagioVO.getEmail()
-						+ "', cargo = '" + avisoEstagioVO.getCargo()
-						+ "', jornada '" + avisoEstagioVO.getJornada()
-						+ "', remuneracao = " + avisoEstagioVO.getRemuneracao()
-						+ "' WHERE idavisoestagio = " + avisoEstagioVO.getIdAvisoEstagio();
+						+ ", empresa = '" + avisoEstagioVO.getEmpresa() + "', telefone = '" + avisoEstagioVO.getTelefone() + "', email = '" + avisoEstagioVO.getEmail()
+						+ "', cargo = '" + avisoEstagioVO.getCargo() + "', jornada = '" + avisoEstagioVO.getJornada() + "', remuneracao = " + avisoEstagioVO.getRemuneracao()
+						+ " WHERE idavisoestagio = " + avisoEstagioVO.getIdAvisoEstagio();
 			try {
 				resultado = stmt.executeUpdate(query);
 			} catch (SQLException e) {
@@ -126,7 +120,7 @@ DateTimeFormatter dataFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 		Connection conn = Banco.getConnection();
 		Statement stmt = (Statement) Banco.getStatement(conn);
 		int resultado = 0;
-		String query = "DELETE FROM avisoestagio WHERE idavisocoordenacao = " + avisoEstagioVO.getIdAvisoEstagio();
+		String query = "DELETE FROM avisoestagio WHERE idavisoestagio = " + avisoEstagioVO.getIdAvisoEstagio();
 		try{
 			resultado = stmt.executeUpdate(query);
 			if(resultado == 1) {
@@ -135,7 +129,7 @@ DateTimeFormatter dataFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 				resultado = stmt.executeUpdate(query);
 			}
 		} catch (SQLException e){
-			System.out.println("Erro ao executar a Query de Exclusão do Aviso da estágio.");
+			System.out.println("Erro ao executar a Query de Exclusão do Aviso de Estágio.");
 			System.out.println("Erro: " + e.getMessage());
 		} finally {
 			Banco.closeStatement(stmt);
@@ -147,23 +141,27 @@ DateTimeFormatter dataFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
 	public ArrayList<AvisoEstagioVO> consultarTodosAvisoEstagioDAO() {
 		Connection conn = Banco.getConnection();
-		Statement stmt = (Statement) Banco.getStatement(conn);
+		Statement stmt = Banco.getStatement(conn);
 		ResultSet resultado = null;
 		ArrayList<AvisoEstagioVO> avisosEstagioVO = new ArrayList<AvisoEstagioVO>();
-		String query = "SELECT av.idaviso, avc.idavisocoordenacao, av.idusuario, avc.descricao, av.datacadastro, av.dataexpiracao "
-				+ " FROM aviso av, avisocoordenacao avc "
-				+ " WHERE av.idaviso = avc.idaviso";
+		String query = "SELECT av.idaviso, ave.idavisoestagio, ave.empresa, ave.telefone, ave.email, ave.cargo, ave.jornada, ave.remuneracao, av.datacadastro, av.dataexpiracao "
+				+ " FROM aviso av, avisoestagio ave "
+				+ " WHERE av.idaviso = ave.idaviso";
 		try{
 			resultado = stmt.executeQuery(query);
 			while(resultado.next()){
 				AvisoEstagioVO avisoEstagioVO = new AvisoEstagioVO();
 				avisoEstagioVO.setIdAviso(Integer.parseInt(resultado.getString(1)));
 				avisoEstagioVO.setIdAvisoEstagio(Integer.parseInt(resultado.getString(2)));
-				avisoEstagioVO.setIdUsuario(Integer.parseInt(resultado.getString(3)));
-				avisoEstagioVO.setCargo(resultado.getString(4));
-				avisoEstagioVO.setDataCadastro(LocalDate.parse(resultado.getString(5), dataFormatter));
-				avisoEstagioVO.setDataExpiracao(LocalDate.parse(resultado.getString(6), dataFormatter));
-				
+				avisoEstagioVO.setEmpresa(resultado.getString(3));
+				avisoEstagioVO.setTelefone(resultado.getString(4));
+				avisoEstagioVO.setEmail(resultado.getString(5));
+				avisoEstagioVO.setCargo(resultado.getString(6));
+				avisoEstagioVO.setJornada(resultado.getString(7));
+				avisoEstagioVO.setRemuneracao(Double.parseDouble(resultado.getString(8)));
+				avisoEstagioVO.setDataCadastro(LocalDate.parse(resultado.getString(9), dataFormatter));
+				avisoEstagioVO.setDataExpiracao(LocalDate.parse(resultado.getString(10), dataFormatter));
+				avisosEstagioVO.add(avisoEstagioVO);
 			}
 		} catch (SQLException e){
 			System.out.println("Erro ao executar a Query de Consulta dos Avisos da estágio.");
@@ -182,20 +180,24 @@ DateTimeFormatter dataFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 		Statement stmt = (Statement) Banco.getStatement(conn);
 		ResultSet resultado = null;
 		AvisoEstagioVO avisoEstagio = new AvisoEstagioVO();
-		String query = "SELECT av.idaviso, avc.idavisocoordenacao, av.idusuario, avc.descricao, av.datacadastro, av.dataexpiracao "
-				+ " FROM aviso av, avisocoordenacao avc "
-				+ " WHERE av.idaviso = avc.idaviso "
+		String query = "SELECT av.idaviso, ave.idavisoestagio, ave.empresa, ave.telefone, ave.email, ave.cargo, ave.jornada, ave.remuneracao, av.datacadastro, av.dataexpiracao "
+				+ " FROM aviso av, avisoestagio ave "
+				+ " WHERE av.idaviso = ave.idaviso "
 				+ " and av.idaviso = " + avisoEstagioVO.getIdAviso()
-				+ " and avc.idavisocoordenacao = " + avisoEstagioVO.getIdAvisoEstagio();
+				+ " and ave.idavisoestagio = " + avisoEstagioVO.getIdAvisoEstagio();
 		try{
 			resultado = stmt.executeQuery(query);
 			if(resultado.next()){
-				avisoEstagioVO.setIdAviso(Integer.parseInt(resultado.getString(1)));
-				avisoEstagioVO.setIdAvisoEstagio(Integer.parseInt(resultado.getString(2)));
-				avisoEstagioVO.setIdUsuario(Integer.parseInt(resultado.getString(3)));
-				avisoEstagioVO.setCargo(resultado.getString(4));
-				avisoEstagioVO.setDataCadastro(LocalDate.parse(resultado.getString(5), dataFormatter));
-				avisoEstagioVO.setDataExpiracao(LocalDate.parse(resultado.getString(6), dataFormatter));
+				avisoEstagio.setIdAviso(Integer.parseInt(resultado.getString(1)));
+				avisoEstagio.setIdAvisoEstagio(Integer.parseInt(resultado.getString(2)));
+				avisoEstagio.setEmpresa(resultado.getString(3));
+				avisoEstagio.setTelefone(resultado.getString(4));
+				avisoEstagio.setEmail(resultado.getString(5));
+				avisoEstagio.setCargo(resultado.getString(6));
+				avisoEstagio.setJornada(resultado.getString(7));
+				avisoEstagio.setRemuneracao(Double.parseDouble(resultado.getString(8)));
+				avisoEstagio.setDataCadastro(LocalDate.parse(resultado.getString(9), dataFormatter));
+				avisoEstagio.setDataExpiracao(LocalDate.parse(resultado.getString(10), dataFormatter));
 			}
 		} catch (SQLException e){
 			System.out.println("Erro ao executar a Query de Consulta do Aviso da estágio.");
