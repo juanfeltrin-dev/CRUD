@@ -22,14 +22,14 @@ public class AvisoCursoLivreDAO extends AvisoDAO {
 		String query = "SELECT avc.nome FROM avisocursolivre avc, aviso av "
 				+ "WHERE avc.idaviso = av.idaviso "
 				+ "and avc.nome like '" + avisoCursoLivreVO.getNome().toUpperCase() + "' "
-				+ "and av.datacurso >= " + avisoCursoLivreVO.getDataCurso();
+				+ "and avc.datacurso >= '" + avisoCursoLivreVO.getDataCurso() + "'";
 		try {
 			resultado = stmt.executeQuery(query);
 			if (resultado.next()){
 				return true;
 			}
 		} catch (SQLException e) {
-			System.out.println("Erro ao executar a Query que verifica existência de Aviso da Coordenação.");
+			System.out.println("Erro ao executar a Query que verifica existência de Aviso de Curso Livre.");
 			System.out.println("Erro: " + e.getMessage());
 			return false;
 		} finally {
@@ -54,7 +54,7 @@ public class AvisoCursoLivreDAO extends AvisoDAO {
 				return true;
 			}
 		} catch (SQLException e) {
-			System.out.println("Erro ao executar a Query que verifica existência de Aviso da Coordenação por ID.");
+			System.out.println("Erro ao executar a Query que verifica existência de Aviso de Curso Livre por ID.");
 			System.out.println("Erro: " + e.getMessage());
 			return false;
 		} finally {
@@ -70,9 +70,14 @@ public class AvisoCursoLivreDAO extends AvisoDAO {
 		Connection conn = Banco.getConnection();
 		Statement stmt = Banco.getStatement(conn);
 		int resultado = 0;
-		String query = "INSERT INTO avisocursolivre (idaviso, nome) VALUES (" 
-				+ idAviso + ", '" 
-				+ avisoCursoLivreVO.getNome() + "')";
+		String query = "INSERT INTO avisocursolivre (idaviso, nome, publicoalvo, requisito, ambiente, datacurso, valor) VALUES (" 
+				+ idAviso
+				+ ",'" + avisoCursoLivreVO.getNome()
+				+ "', '" + avisoCursoLivreVO.getPublicoAlvo()
+				+ "', '" + avisoCursoLivreVO.getRequisito()
+				+ "', '" + avisoCursoLivreVO.getAmbiente()
+				+ "', '" + avisoCursoLivreVO.getDataCurso()
+				+ "', " + avisoCursoLivreVO.getValor();
 		try {
 			resultado = stmt.executeUpdate(query);
 		} catch (SQLException e) {
@@ -91,9 +96,14 @@ public class AvisoCursoLivreDAO extends AvisoDAO {
 		if(atualizado) {
 			Connection conn = Banco.getConnection();
 			Statement stmt = Banco.getStatement(conn);
-			String query = "UPDATE avisocoordenacao SET idaviso = " + avisoCursoLivreVO.getIdAviso() 
+			String query = "UPDATE avisocursolivre SET idaviso = " + avisoCursoLivreVO.getIdAviso() 
 						+ ", nome = '" + avisoCursoLivreVO.getNome()
-						+ "' WHERE idavisocursolivre = " + avisoCursoLivreVO.getIdAvisoCursoLivre();
+						+ ", publicoalvo = '" + avisoCursoLivreVO.getPublicoAlvo()
+						+ "', requisito = '" + avisoCursoLivreVO.getRequisito()
+						+ "', ambiente = '" + avisoCursoLivreVO.getAmbiente()
+						+ "', datacurso = '" + avisoCursoLivreVO.getDataCurso()
+						+ "', valor = " + avisoCursoLivreVO.getValor()
+						+ " WHERE idavisocursolivre = " + avisoCursoLivreVO.getIdAvisoCursoLivre();
 			try {
 				resultado = stmt.executeUpdate(query);
 			} catch (SQLException e) {
@@ -134,8 +144,8 @@ public class AvisoCursoLivreDAO extends AvisoDAO {
 		Statement stmt = Banco.getStatement(conn);
 		ResultSet resultado = null;
 		ArrayList<AvisoCursoLivreVO> avisosCursoLivreVO = new ArrayList<AvisoCursoLivreVO>();
-		String query = "SELECT av.idaviso, avc.idavisocursolivre, av.idusuario, avc.nome, av.datacadastro, av.dataexpiracao "
-				+ " FROM aviso av, avisocoordenacao avc "
+		String query = "SELECT av.idaviso, avc.idavisocursolivre, av.idusuario, avc.nome, avc.publicoalvo, avc.requisito, avc.ambiente, avc.datacurso, avc.valor, av.datacadastro, av.dataexpiracao "
+				+ " FROM aviso av, avisocursolivre avc "
 				+ " WHERE av.idaviso = avc.idaviso";
 		try{
 			resultado = stmt.executeQuery(query);
@@ -147,9 +157,11 @@ public class AvisoCursoLivreDAO extends AvisoDAO {
 				avisoCursoLivreVO.setNome(resultado.getString(4));
 				avisoCursoLivreVO.setPublicoAlvo(resultado.getString(5));
 				avisoCursoLivreVO.setRequisito(resultado.getString(6));
-				avisoCursoLivreVO.setRequisito(resultado.getString(7));
+				avisoCursoLivreVO.setAmbiente(resultado.getString(7));
 				avisoCursoLivreVO.setDataCurso(LocalDate.parse(resultado.getString(8), dataFormatter));
 				avisoCursoLivreVO.setValor(Integer.parseInt(resultado.getString(9)));
+				avisoCursoLivreVO.setDataCadastro(LocalDate.parse(resultado.getString(10), dataFormatter));
+				avisoCursoLivreVO.setDataExpiracao(LocalDate.parse(resultado.getString(11), dataFormatter));
 				avisosCursoLivreVO.add(avisoCursoLivreVO);
 			}
 		} catch (SQLException e){
@@ -168,26 +180,28 @@ public class AvisoCursoLivreDAO extends AvisoDAO {
 		Statement stmt = Banco.getStatement(conn);
 		ResultSet resultado = null;
 		AvisoCursoLivreVO avisoCursoLivre = new AvisoCursoLivreVO();
-		String query = "SELECT av.idaviso, avc.idavisocoordenacao, av.idusuario, avc.descricao, av.datacadastro, av.dataexpiracao "
-				+ " FROM aviso av, avisocoordenacao avc "
+		String query = "SELECT av.idaviso, avc.idavisocursolivre, av.idusuario, avc.nome, avc.publicoalvo, avc.requisito, avc.ambiente, avc.datacurso, avc.valor, av.datacadastro, av.dataexpiracao "
+				+ " FROM aviso av, avisocursolivre avc "
 				+ " WHERE av.idaviso = avc.idaviso "
 				+ " and av.idaviso = " + avisoCursoLivreVO.getIdAviso()
-				+ " and avc.idavisocoordenacao = " + avisoCursoLivreVO.getIdAvisoCursoLivre();
+				+ " and avc.idavisocursolivre = " + avisoCursoLivreVO.getIdAvisoCursoLivre();
 		try{
 			resultado = stmt.executeQuery(query);
 			if(resultado.next()){
-				avisoCursoLivre.setIdAviso(Integer.parseInt(resultado.getString(1)));
-				avisoCursoLivre.setIdAvisoCursoLivre(Integer.parseInt(resultado.getString(2)));
-				avisoCursoLivre.setIdUsuario(Integer.parseInt(resultado.getString(3)));
-				avisoCursoLivre.setNome(resultado.getString(4));
+				avisoCursoLivreVO.setIdAviso(Integer.parseInt(resultado.getString(1)));
+				avisoCursoLivreVO.setIdAvisoCursoLivre(Integer.parseInt(resultado.getString(2)));
+				avisoCursoLivreVO.setIdUsuario(Integer.parseInt(resultado.getString(3)));
+				avisoCursoLivreVO.setNome(resultado.getString(4));
 				avisoCursoLivreVO.setPublicoAlvo(resultado.getString(5));
 				avisoCursoLivreVO.setRequisito(resultado.getString(6));
-				avisoCursoLivreVO.setRequisito(resultado.getString(7));
+				avisoCursoLivreVO.setAmbiente(resultado.getString(7));
 				avisoCursoLivreVO.setDataCurso(LocalDate.parse(resultado.getString(8), dataFormatter));
 				avisoCursoLivreVO.setValor(Integer.parseInt(resultado.getString(9)));
+				avisoCursoLivreVO.setDataCadastro(LocalDate.parse(resultado.getString(10), dataFormatter));
+				avisoCursoLivreVO.setDataExpiracao(LocalDate.parse(resultado.getString(11), dataFormatter));
 			}
 		} catch (SQLException e){
-			System.out.println("Erro ao executar a Query de Consulta do Aviso da Coordenação.");
+			System.out.println("Erro ao executar a Query de Consulta do Aviso de Curso Livre.");
 			System.out.println("Erro: " + e.getMessage());
 		} finally {
 			Banco.closeResultSet(resultado);

@@ -108,6 +108,8 @@ public class AvisoCursoLivreVO extends AvisoVO {
 				this.getRequisito(), 
 				this.getAmbiente(), 
 				this.getDataCurso().format(formataDate), 
-				this.getValor());
+				this.getValor(), 
+				this.getDataCadastro().format(formataDate), 
+				this.getDataExpiracao().format(formataDate));
 	}
 }

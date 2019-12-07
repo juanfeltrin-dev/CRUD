@@ -73,18 +73,22 @@ public class MenuCursoLivre {
 	private void cadastrarAvisoCursoLivre(UsuarioVO usuarioVO) {
 		AvisoCursoLivreVO avisoCursoLivreVO = new AvisoCursoLivreVO();
 		avisoCursoLivreVO.setIdUsuario(usuarioVO.getIdUsuario());
-		System.out.print("\nDigite o Aviso da Coordenação: ");
+		System.out.print("\nDigite o nome do Curso Livre: ");
 		avisoCursoLivreVO.setNome(teclado.nextLine());
-		System.out.print("\nDigite o Aviso da Coordenação: ");
+		System.out.print("\nDigite o público alvo: ");
 		avisoCursoLivreVO.setPublicoAlvo(teclado.nextLine());
-		System.out.print("Digite a data de cadastro do Aviso da Coordenação: ");
+		System.out.print("Digite o requisito: ");
 		avisoCursoLivreVO.setRequisito(teclado.nextLine());
-		System.out.print("Digite a data de expiração do Aviso da Coordenação: ");
+		System.out.print("Digite o ambiente: ");
 		avisoCursoLivreVO.setAmbiente(teclado.nextLine());
-		System.out.print("Digite a data de cadastro do Aviso da Coordenação: ");
+		System.out.print("Digite a data do Curso Livre: ");
 		avisoCursoLivreVO.setDataCurso(LocalDate.parse(teclado.nextLine(), dataFormatter));
-		System.out.print("Digite a data de expiração do Aviso da Coordenação: ");
+		System.out.print("Digite o valor do Curso Livre: ");
 		avisoCursoLivreVO.setValor(Double.parseDouble(teclado.nextLine()));
+		System.out.print("Digite a data de cadastro do Aviso de Curso Livre: ");
+		avisoCursoLivreVO.setDataCadastro(LocalDate.parse(teclado.nextLine(), dataFormatter));
+		System.out.print("Digite a data de expiração do Aviso de Curso Livre: ");
+		avisoCursoLivreVO.setDataExpiracao(LocalDate.parse(teclado.nextLine(), dataFormatter));
 		
 		ControladoraAvisoCursoLivre controladoraAvisoCursoLivre = new ControladoraAvisoCursoLivre();
 		controladoraAvisoCursoLivre.cadastrarAvisoCursoLivreController(avisoCursoLivreVO);
@@ -95,7 +99,7 @@ public class MenuCursoLivre {
 		AvisoCursoLivreVO avisoCursoLivreVO = new AvisoCursoLivreVO();
 		System.out.print("\nInforme o código do Aviso: ");
 		avisoCursoLivreVO.setIdAviso(Integer.parseInt(teclado.nextLine()));
-		System.out.print("\nInforme o código do Aviso da Coordenacao: ");
+		System.out.print("\nInforme o código do Aviso de Curso Livre: ");
 		avisoCursoLivreVO.setIdAvisoCursoLivre(Integer.parseInt(teclado.nextLine()));
 
 		ControladoraAvisoCursoLivre controladoraAvisoCursoLivre = new ControladoraAvisoCursoLivre();
@@ -106,17 +110,21 @@ public class MenuCursoLivre {
 	private void atualizarAvisoCursoLivre(UsuarioVO usuarioVO) {
 		AvisoCursoLivreVO avisoCursoLivreVO = new AvisoCursoLivreVO();
 		avisoCursoLivreVO.setIdUsuario(usuarioVO.getIdUsuario());
-		System.out.print("\nDigite o Aviso da Coordenação: ");
+		System.out.print("\nInforme o código do Aviso: ");
+		avisoCursoLivreVO.setIdAviso(Integer.parseInt(teclado.nextLine()));
+		System.out.print("\nInforme o código do Aviso de Curso Livre: ");
+		avisoCursoLivreVO.setIdAvisoCursoLivre(Integer.parseInt(teclado.nextLine()));
+		System.out.print("\nDigite o nome do Curso Livre: ");
 		avisoCursoLivreVO.setNome(teclado.nextLine());
-		System.out.print("\nDigite o Aviso da Coordenação: ");
+		System.out.print("\nDigite o público alvo: ");
 		avisoCursoLivreVO.setPublicoAlvo(teclado.nextLine());
-		System.out.print("Digite a data de cadastro do Aviso da Coordenação: ");
+		System.out.print("Digite o requisito: ");
 		avisoCursoLivreVO.setRequisito(teclado.nextLine());
-		System.out.print("Digite a data de expiração do Aviso da Coordenação: ");
+		System.out.print("Digite o ambiente: ");
 		avisoCursoLivreVO.setAmbiente(teclado.nextLine());
-		System.out.print("Digite a data de cadastro do Aviso da Coordenação: ");
+		System.out.print("Digite a data do Curso Livre: ");
 		avisoCursoLivreVO.setDataCurso(LocalDate.parse(teclado.nextLine(), dataFormatter));
-		System.out.print("Digite a data de expiração do Aviso da Coordenação: ");
+		System.out.print("Digite o valor do Curso Livre: ");
 		avisoCursoLivreVO.setValor(Double.parseDouble(teclado.nextLine()));
 
 		ControladoraAvisoCursoLivre controladoraAvisoCursoLivre = new ControladoraAvisoCursoLivre();

@@ -1,8 +1,11 @@
 package model.vo;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class AvisoEstagioVO extends AvisoVO {
+	
+	DateTimeFormatter formataDate = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 	
 	private int idAvisoEstagio;
 	private int idAviso;
@@ -10,11 +13,11 @@ public class AvisoEstagioVO extends AvisoVO {
 	private String telefone;
 	private String email;
 	private String cargo;
-	private int jornada;
+	private String jornada;
 	private double remuneracao;
 	
 	public AvisoEstagioVO(int idAvisoEstagio, int idAviso, int idUsuario, LocalDate dataCadastro, LocalDate dataExpiracao, String empresa, String telefone, String email, String cargo,
-			int jornada, double remuneracao) {
+			String jornada, double remuneracao) {
 		super(idAviso, idUsuario, dataCadastro, dataExpiracao);
 		this.idAvisoEstagio = idAvisoEstagio;
 		this.idAviso = idAviso;
@@ -66,10 +69,10 @@ public class AvisoEstagioVO extends AvisoVO {
 	public void setCargo(String cargo) {
 		this.cargo = cargo;
 	}
-	public int getJornada() {
+	public String getJornada() {
 		return jornada;
 	}
-	public void setJornada(int jornada) {
+	public void setJornada(String jornada) {
 		this.jornada = jornada;
 	}
 	public double getRemuneracao() {
@@ -88,7 +91,9 @@ public class AvisoEstagioVO extends AvisoVO {
 		this.getEmail(),
 		this.getCargo(),
 		this.getJornada(),
-		this.getRemuneracao());
+		this.getRemuneracao(),
+		this.getDataCadastro().format(formataDate), 
+		this.getDataExpiracao().format(formataDate));
 	}
 
 	public void cadastrarAvisoEstagioLivreBO(AvisoEstagioVO avisoEstagioVO) {

@@ -2,24 +2,23 @@ package controller;
 
 import java.util.ArrayList;
 
-import model.bo.AvisoCoordenacaoBO;
 import model.bo.AvisoEstagioLivreBO;
 import model.dto.AvisoEstagioDTO;
 import model.vo.AvisoEstagioVO;
 
 public class ControladoraAvisoEstagio {
 	public void cadastrarAvisoEstagioLivreController(AvisoEstagioVO avisoEstagioVO) {
-		AvisoEstagioVO avisoEstagioLivreBO = new AvisoEstagioVO();
-		avisoEstagioLivreBO.cadastrarAvisoEstagioLivreBO(avisoEstagioVO);
+		AvisoEstagioLivreBO avisoEstagioLivreBO = new AvisoEstagioLivreBO();
+		avisoEstagioLivreBO.cadastrarAvisoEstagiooBO(avisoEstagioVO);
 	}
 
 	public void excluirAvisoEstagioLivreController(AvisoEstagioVO avisoEstagioVO) {
-		AvisoEstagioVO avisoEstagioLivreBO = new AvisoEstagioVO();
-		avisoEstagioLivreBO.excluirAvisoEstagioLivreBO(avisoEstagioVO);
+		AvisoEstagioLivreBO avisoEstagioLivreBO = new AvisoEstagioLivreBO();
+		avisoEstagioLivreBO.excluirAvisoEstagioBO(avisoEstagioVO);
 	}
 
 	public void atualizarAvisoEstagioLivreController(AvisoEstagioVO avisoEstagioVO) {
-		AvisoEstagioVO avisoEstagioLivreBO = new AvisoEstagioVO();
+		AvisoEstagioLivreBO avisoEstagioLivreBO = new AvisoEstagioLivreBO();
 		avisoEstagioLivreBO.atualizarAvisoEstagioBO(avisoEstagioVO);
 	}
 
