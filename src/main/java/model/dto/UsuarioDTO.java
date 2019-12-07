@@ -1,22 +1,22 @@
 package model.dto;
 
-import model.vo.TipoUsuarioVO;
 
-public class UsuarioDTO extends TipoUsuarioVO {
+public class UsuarioDTO {
 	private String nome;
 	private String email;
 	private String login;
 	private String tipoUsuario;
-	
-	public UsuarioDTO(int idTipoUsuario, String descricao, String nome, String email, String login,
-			String tipoUsuario) {
-		super(idTipoUsuario, descricao);
+	private String acao;
+
+	public UsuarioDTO(String nome, String email, String login, String tipoUsuario, String acao) {
+		super();
 		this.nome = nome;
 		this.email = email;
 		this.login = login;
 		this.tipoUsuario = tipoUsuario;
+		this.acao = acao;
 	}
-	
+
 	public UsuarioDTO() {
 		super();
 	}
@@ -45,13 +45,20 @@ public class UsuarioDTO extends TipoUsuarioVO {
 	public void setTipoUsuario(String tipoUsuario) {
 		this.tipoUsuario = tipoUsuario;
 	}
+	public String getAcao() {
+		return acao;
+	}
+	public void setAcao(String acao) {
+		this.acao = acao;
+	}
 
 	public void imprimir() {
-		System.out.printf("\n%-15s   %-15s   %-15s   %8d  \n", 
+		System.out.printf("\n%-15s   %-15s   %-15s   %8s   %8s  \n", 
 				this.getNome(), 
 				this.getEmail(), 
 				this.getLogin(), 
-				this.getTipoUsuario());
+				this.getTipoUsuario(), 
+				this.getAcao());
 	}
 	
 }

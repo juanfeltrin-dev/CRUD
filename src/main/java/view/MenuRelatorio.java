@@ -79,7 +79,7 @@ public class MenuRelatorio {
 		ControladoraAvisoEstagio controladoraAvisoEstagio = new ControladoraAvisoEstagio();
 		ArrayList<AvisoEstagioDTO> listaAvisoEstagioDTO = controladoraAvisoEstagio.consultarRelatorioAvisosEstagioController();
 		System.out.print("\n--------- RESULTADO DO RELATÓRIO ---------");
-		System.out.printf("\n%8s   %15s   %-50s   %-15s   %-15s  \n", "ID AVISO", "ID AVISO COORD.", "DESCRIÇÃO", "DATA CADASTRO", "DATA EXPIRAÇÃO");
+		System.out.printf("\n%-15s   %-20s   %-15s   %-15s   %-15s  \n", "EMPRESA", "CARGO", "JORNADA", "REMUNERAÇÃO", "TELEFONE");
 		for (int i = 0; i < listaAvisoEstagioDTO.size(); i++) {
 			listaAvisoEstagioDTO.get(i).imprimir();
 		}
@@ -89,7 +89,7 @@ public class MenuRelatorio {
 		ControladoraUsuario controladoraUsuario = new ControladoraUsuario();
 		ArrayList<UsuarioDTO> listaAvisoEstagioDTO = controladoraUsuario.consultarRelatorioUsuariosController();
 		System.out.print("\n--------- RESULTADO DO RELATÓRIO ---------");
-		System.out.printf("\n%8s   %15s   %-50s   %-15s   %-15s  \n", "ID AVISO", "ID AVISO COORD.", "DESCRIÇÃO", "DATA CADASTRO", "DATA EXPIRAÇÃO");
+		System.out.printf("\n%-15s   %-15s   %-15s   %8s   %8s  \n", "NOME", "EMAIL", "LOGIN", "TIPO USUÁRIO", "AÇÃO");
 		for (int i = 0; i < listaAvisoEstagioDTO.size(); i++) {
 			listaAvisoEstagioDTO.get(i).imprimir();
 		}

@@ -228,8 +228,8 @@ DateTimeFormatter dataFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 		Statement stmt = Banco.getStatement(conn);
 		ResultSet resultado = null;
 		ArrayList<AvisoEstagioDTO> avisosEstagioDTO = new ArrayList<AvisoEstagioDTO>();
-		String query = "SELECT avc.idavisocoordenacao, avc.empressa, avc.cargo, avc.jornada, avc.remuneracao, avc.telefone "
-				+ " FROM avisocoordenacao avc";
+		String query = "SELECT ave.empresa, ave.cargo, ave.jornada, ave.remuneracao, ave.telefone "
+				+ " FROM avisoestagio ave";
 		try{
 			resultado = stmt.executeQuery(query);
 			while(resultado.next()){
@@ -239,10 +239,11 @@ DateTimeFormatter dataFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 				avisoEstagioDTO.setJornada(resultado.getString(3));
 				avisoEstagioDTO.setRemuneracao(Double.parseDouble(resultado.getString(4)));
 				avisoEstagioDTO.setTelefone(resultado.getString(5));
+				System.out.println(avisoEstagioDTO);
 				avisosEstagioDTO.add(avisoEstagioDTO);
 			}
 		} catch (SQLException e){
-			System.out.println("Erro ao executar a Query de Consulta dos Avisos da Coordenação.");
+			System.out.println("Erro ao executar a Query de Consulta de Relatório de Avisos de Estágio.");
 			System.out.println("Erro: " + e.getMessage());
 		} finally {
 			Banco.closeResultSet(resultado);

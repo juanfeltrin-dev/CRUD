@@ -52,7 +52,7 @@ public class AvisoEstagioDTO{
 	}
 
 	public void imprimir() {
-		System.out.printf("\n%8d   %8d   %-15s   %-15s   %-15s  \n", 
+		System.out.printf("\n%-15s   %-20s   %-15s   %-15s   %-15s  \n", 
 				this.getNomeEmpresa(), 
 				this.getCargo(), 
 				this.getJornada(), 

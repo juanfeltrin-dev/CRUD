@@ -1,10 +1,13 @@
 package model.dto;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 import model.vo.AvisoVO;
 
 public class AvisoCoordenacaoDTO extends AvisoVO {
+	
+	DateTimeFormatter formataDate = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
 	private int idAvisoCoordenacao;
 	private String descricao;
@@ -35,12 +38,12 @@ public class AvisoCoordenacaoDTO extends AvisoVO {
 	}
 
 	public void imprimir() {
-		System.out.printf("\n%8d   %8d   %-50s   %-15s   %-15s  \n", 
+		System.out.printf("\n%8s   %15s   %-50s   %-15s   %-15s  \n", 
 				this.getIdAvisoCoordenacao(), 
 				this.getIdAviso(), 
 				this.getDescricao(), 
-				this.getDataCadastro(), 
-				this.getDataExpiracao());
+				this.getDataCadastro().format(formataDate), 
+				this.getDataExpiracao().format(formataDate));
 	}
 	
 	

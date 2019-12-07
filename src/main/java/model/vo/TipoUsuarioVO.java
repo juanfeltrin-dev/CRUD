@@ -3,11 +3,13 @@ package model.vo;
 public class TipoUsuarioVO {
 	private int idTipoUsuario;
 	private String descricao;
-	
-	public TipoUsuarioVO(int idTipoUsuario, String descricao) {
+	private String acao;
+
+	public TipoUsuarioVO(int idTipoUsuario, String descricao, String acao) {
 		super();
 		this.idTipoUsuario = idTipoUsuario;
 		this.descricao = descricao;
+		this.acao = acao;
 	}
 	
 	public TipoUsuarioVO() {
@@ -26,5 +28,12 @@ public class TipoUsuarioVO {
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
 	}
+	public String getAcao() {
+		return acao;
+	}
+	public void setAcao(String acao) {
+		this.acao = acao;
+	}
+	
 	
 }
