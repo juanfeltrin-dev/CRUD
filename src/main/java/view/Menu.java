@@ -28,7 +28,7 @@ public class Menu {
 				}
 				case 2: {
 					MenuRelatorio menuRelatorio = new MenuRelatorio();
-					menuRelatorio.apresentarMenuRelatorio();
+					menuRelatorio.apresentarMenuRelatorio(usuarioVO);
 					break;
 				}
 				case 3: {

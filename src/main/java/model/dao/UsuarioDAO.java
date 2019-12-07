@@ -4,8 +4,11 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
+import model.dto.AvisoCoordenacaoDTO;
+import model.dto.UsuarioDTO;
 import model.vo.TipoUsuarioVO;
 import model.vo.UsuarioVO;
 
@@ -211,6 +214,35 @@ public class UsuarioDAO {
 	            Banco.closeConnection(conn);
 	        }
 		return lista;
+	}
+
+	public static ArrayList<UsuarioDTO> consultarRelatorioUsuariosDAO() {
+		Connection conn = Banco.getConnection();
+		Statement stmt = Banco.getStatement(conn);
+		ResultSet resultado = null;
+		ArrayList<UsuarioDTO> usuariosDTO = new ArrayList<UsuarioDTO>();
+		String query = "SELECT u.nome, u.email, u.login, t.descricao, t.acao "
+				+ " FROM usuario u, tipousuario t where u.IDTIPOUSUARIO = t.IDTIPOUSUARIO";
+		try{
+			resultado = stmt.executeQuery(query);
+			while(resultado.next()){
+				UsuarioDTO usuarioDTO = new UsuarioDTO();
+				usuarioDTO.setNome(resultado.getString(1));
+				usuarioDTO.setEmail(resultado.getString(2));
+				usuarioDTO.setLogin(resultado.getString(3));
+				usuarioDTO.setTipoUsuario(resultado.getString(4));
+				usuarioDTO.setAcao(resultado.getString(5));
+				usuariosDTO.add(usuarioDTO);
+			}
+		} catch (SQLException e){
+			System.out.println("Erro ao executar a Query de Consulta dos Avisos da Coordenação.");
+			System.out.println("Erro: " + e.getMessage());
+		} finally {
+			Banco.closeResultSet(resultado);
+			Banco.closeStatement(stmt);
+			Banco.closeConnection(conn);
+		}
+		return usuariosDTO;
 	}
 
 }

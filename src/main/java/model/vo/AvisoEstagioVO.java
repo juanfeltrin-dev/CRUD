@@ -78,5 +78,37 @@ public class AvisoEstagioVO extends AvisoVO {
 	public void setRemuneracao(double remuneracao) {
 		this.remuneracao = remuneracao;
 	}
+
+	public void imprimir() {
+		System.out.printf("\n%8d   %15d   %-50s   %-15s   %-15s   %-15s   %-15s   %-15s  \n", 
+		this.getIdAvisoEstagio(),
+		this.getIdAviso(),
+		this.getEmpresa(),
+		this.getTelefone(),
+		this.getEmail(),
+		this.getCargo(),
+		this.getJornada(),
+		this.getRemuneracao());
+	}
+
+	public void cadastrarAvisoEstagioLivreBO(AvisoEstagioVO avisoEstagioVO) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void excluirAvisoEstagioLivreBO(AvisoEstagioVO avisoEstagioVO) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void atualizarAvisoEstagioBO(AvisoEstagioVO avisoEstagioVO) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public static boolean isEmpty() {
+		// TODO Auto-generated method stub
+		return false;
+	}
 	
 }
