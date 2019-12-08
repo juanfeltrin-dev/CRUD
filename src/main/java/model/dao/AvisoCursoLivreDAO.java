@@ -159,13 +159,13 @@ public class AvisoCursoLivreDAO extends AvisoDAO {
 				avisoCursoLivreVO.setRequisito(resultado.getString(6));
 				avisoCursoLivreVO.setAmbiente(resultado.getString(7));
 				avisoCursoLivreVO.setDataCurso(LocalDate.parse(resultado.getString(8), dataFormatter));
-				avisoCursoLivreVO.setValor(Integer.parseInt(resultado.getString(9)));
+				avisoCursoLivreVO.setValor(Double.parseDouble(resultado.getString(9)));
 				avisoCursoLivreVO.setDataCadastro(LocalDate.parse(resultado.getString(10), dataFormatter));
 				avisoCursoLivreVO.setDataExpiracao(LocalDate.parse(resultado.getString(11), dataFormatter));
 				avisosCursoLivreVO.add(avisoCursoLivreVO);
 			}
 		} catch (SQLException e){
-			System.out.println("Erro ao executar a Query de Consulta dos Avisos da Coordenação.");
+			System.out.println("Erro ao executar a Query de Consulta dos Avisos de Curso Livre.");
 			System.out.println("Erro: " + e.getMessage());
 		} finally {
 			Banco.closeResultSet(resultado);
@@ -196,7 +196,7 @@ public class AvisoCursoLivreDAO extends AvisoDAO {
 				avisoCursoLivreVO.setRequisito(resultado.getString(6));
 				avisoCursoLivreVO.setAmbiente(resultado.getString(7));
 				avisoCursoLivreVO.setDataCurso(LocalDate.parse(resultado.getString(8), dataFormatter));
-				avisoCursoLivreVO.setValor(Integer.parseInt(resultado.getString(9)));
+				avisoCursoLivreVO.setValor(Double.parseDouble(resultado.getString(9)));
 				avisoCursoLivreVO.setDataCadastro(LocalDate.parse(resultado.getString(10), dataFormatter));
 				avisoCursoLivreVO.setDataExpiracao(LocalDate.parse(resultado.getString(11), dataFormatter));
 			}

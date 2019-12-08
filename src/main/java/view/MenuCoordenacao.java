@@ -24,7 +24,6 @@ public class MenuCoordenacao {
 	
 	private static final int OPCAO_MENU_CONSULTAR_TODOS_AVISOS_COORDENACAO = 1;
 	private static final int OPCAO_MENU_CONSULTAR_UM_AVISO_COORDENACAO = 2;
-	private static final int OPCAO_MENU_CONSULTAR_RELATORIO_AVISO_COORDENACAO = 3;
 	private static final int OPCAO_MENU_CONSULTAR_AVISO_COORDENACAO_SAIR = 9;
 	
 	private static final int ADMINISTRADOR = 1;
@@ -144,20 +143,6 @@ public class MenuCoordenacao {
 					avisoCoordenacao.imprimir();
 					break;
 				}
-				case OPCAO_MENU_CONSULTAR_RELATORIO_AVISO_COORDENACAO: {
-					opcao = OPCAO_MENU_CONSULTAR_AVISO_COORDENACAO_SAIR;
-					AvisoCoordenacaoVO avisoCoordenacaoVO = new AvisoCoordenacaoVO();
-					System.out.print("\nInforme o código do Aviso: ");
-					avisoCoordenacaoVO.setIdAviso(Integer.parseInt(teclado.nextLine()));
-					System.out.print("\nInforme o código do Aviso da Coordenação: ");
-					avisoCoordenacaoVO.setIdAvisoCoordenacao(Integer.parseInt(teclado.nextLine()));
-	
-					AvisoCoordenacaoVO avisoCoordenacao = controladoraAvisoCoordenacao.consultarAvisoCoordenacaoController(avisoCoordenacaoVO);
-					System.out.print("\n--------- RESULTADO DA CONSULTA ---------");
-					System.out.printf("\n%8s   %15s   %-50s   %-15s   %-15s  \n", "ID AVISO", "ID AVISO COORD.", "DESCRIÇÃO", "DATA CADASTRO", "DATA EXPIRAÇÃO");
-					avisoCoordenacao.imprimir();
-					break;
-				}
 				default: {
 					System.out.println("\nOpção Inválida");
 					opcao = this.apresentarOpcoesConsulta();
@@ -170,7 +155,6 @@ public class MenuCoordenacao {
 		System.out.println("\nInforme o tipo de consulta a ser realizada");
 		System.out.println(OPCAO_MENU_CONSULTAR_TODOS_AVISOS_COORDENACAO + " - Consultar todos os Avisos da Coordenação");
 		System.out.println(OPCAO_MENU_CONSULTAR_UM_AVISO_COORDENACAO + " - Consultar um Aviso da Coordenação Específico");
-		System.out.println(OPCAO_MENU_CONSULTAR_RELATORIO_AVISO_COORDENACAO + " - Consultar Relatório de Avisos da Coordenação");
 		System.out.println(OPCAO_MENU_CONSULTAR_AVISO_COORDENACAO_SAIR + " - Voltar");
 		System.out.print("\nDigite a Opção: ");
 		return Integer.parseInt(teclado.nextLine());

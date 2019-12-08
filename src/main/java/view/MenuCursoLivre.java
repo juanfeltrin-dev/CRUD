@@ -141,7 +141,7 @@ public class MenuCursoLivre {
 					opcao = OPCAO_MENU_CONSULTAR_AVISO_CURSO_LIVRE_SAIR;
 					ArrayList<AvisoCursoLivreVO> listaAvisosCursoLivreVO = controladoraAvisoCursoLivre.consultarTodosAvisosCursoLivreController();
 					System.out.print("\n--------- RESULTADO DA CONSULTA ---------");
-					System.out.printf("\n%8s   %15s   %-50s   %-15s   %-15s  \n", "ID AVISO", "ID AVISO COORD.", "DESCRIÇÃO", "DATA CADASTRO", "DATA EXPIRAÇÃO");
+					System.out.printf("\n%8s   %15s   %-50s   %-15s   %-15s   %-15s   %-15s   %-15s   %-15s   %-15s  \n", "ID AVISO", "ID AVISO CURSO LIVRE", "NOME", "PÚBLICO ALVO", "REQUISITO", "AMBIENTE", "DATA CURSO", "VALOR", "DATA CADASTRO", "DATA EXPIRAÇÃO");
 					for (int i = 0; i < listaAvisosCursoLivreVO.size(); i++) {
 						listaAvisosCursoLivreVO.get(i).imprimir();
 					}
@@ -152,12 +152,12 @@ public class MenuCursoLivre {
 					AvisoCursoLivreVO avisoCursoLivreVO = new AvisoCursoLivreVO();
 					System.out.print("\nInforme o código do Aviso: ");
 					avisoCursoLivreVO.setIdAviso(Integer.parseInt(teclado.nextLine()));
-					System.out.print("\nInforme o código do Aviso da Coordenação: ");
+					System.out.print("\nInforme o código do Aviso do Curso Livre: ");
 					avisoCursoLivreVO.setIdAvisoCursoLivre(Integer.parseInt(teclado.nextLine()));
 	
 					AvisoCursoLivreVO avisoCursoLivre = controladoraAvisoCursoLivre.consultarAvisoCursoLivreController(avisoCursoLivreVO);
 					System.out.print("\n--------- RESULTADO DA CONSULTA ---------");
-					System.out.printf("\n%8s   %15s   %-50s   %-15s   %-15s   %-15s   %-15s   %-15s  \n", "ID AVISO", "ID AVISO COORD.", "NOME", "PÚBLICO ALVO", "REQUISITO", "AMBIENTE", "DATA CURSO", "VALOR");
+					System.out.printf("\n%8d   %15d   %-50s   %-15s   %-15s   %-15s   %-15s   %-15s   %-15s   %-15s  \n", "ID AVISO", "ID AVISO CURSO LIVRE", "NOME", "PÚBLICO ALVO", "REQUISITO", "AMBIENTE", "DATA CURSO", "VALOR", "DATA CADASTRO", "DATA EXPIRAÇÃO");
 					avisoCursoLivre.imprimir();
 					break;
 				}
@@ -171,8 +171,8 @@ public class MenuCursoLivre {
 
 	private int apresentarOpcoesConsulta() {
 		System.out.println("\nInforme o tipo de consulta a ser realizada");
-		System.out.println(OPCAO_MENU_CONSULTAR_TODOS_AVISOS_CURSO_LIVRE + " - Consultar todos os Avisos da Coordenação");
-		System.out.println(OPCAO_MENU_CONSULTAR_UM_AVISO_CURSO_LIVRE + " - Consultar um Aviso da Coordenação Específico");
+		System.out.println(OPCAO_MENU_CONSULTAR_TODOS_AVISOS_CURSO_LIVRE + " - Consultar todos os Avisos de Curso Livre");
+		System.out.println(OPCAO_MENU_CONSULTAR_UM_AVISO_CURSO_LIVRE + " - Consultar um Aviso de Curso Livre Específico");
 		System.out.println(OPCAO_MENU_CONSULTAR_AVISO_CURSO_LIVRE_SAIR + " - Voltar");
 		System.out.print("\nDigite a Opção: ");
 		return Integer.parseInt(teclado.nextLine());

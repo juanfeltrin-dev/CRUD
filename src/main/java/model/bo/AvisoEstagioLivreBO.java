@@ -2,9 +2,7 @@ package model.bo;
 
 import java.util.ArrayList;
 
-import model.dao.AvisoCoordenacaoDAO;
 import model.dao.AvisoEstagioDAO;
-import model.dto.AvisoCoordenacaoDTO;
 import model.dto.AvisoEstagioDTO;
 import model.vo.AvisoEstagioVO;
 

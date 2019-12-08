@@ -163,7 +163,7 @@ public class MenuEstagio {
 						avisoEstagioLivreVO.setIdAvisoEstagio(Integer.parseInt(teclado.nextLine()));
 						AvisoEstagioVO avisoEstagio = controladoraAvisoEstagio.consultarAvisoEstagioLivreController(avisoEstagioLivreVO);
 						System.out.print("\n--------- RESULTADO DA CONSULTA ---------");
-						System.out.printf("\n%8s   %15s   %-50s   %-15s   %-15s   %-15s   %-15s   %-15s   %-15s   %-15s  \n", "ID AVISO", "ID AVISO ESTÁGIO", "EMPRESA", "TELEFONE", "EMAIL", "CARGO", "JORNADA", "REMUNERAÇÃO", "DATA CADASTRO", "DATA EXPIRAÇÃO");
+						System.out.printf("\n%8s   %15s   %-50s   %-15s   %-15s   %-15s   %-15s   %-15s   %-15s   %-15s  \n", "ID AVISO ESTÁGIO", "ID AVISO", "EMPRESA", "TELEFONE", "EMAIL", "CARGO", "JORNADA", "REMUNERAÇÃO", "DATA CADASTRO", "DATA EXPIRAÇÃO");
 						avisoEstagio.imprimir();
 						break;
 					}

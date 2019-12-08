@@ -43,10 +43,10 @@ public class MenuAviso {
     private int apresentarOpcoesMenu() {
         System.out.println("\nSistema de Aviso - Menu Principal");
         System.out.println("\nOpções");
-        System.out.println( OPCAO_MENU_COORDENACAO + " menu de coordencao");
-        System.out.println(OPCAO_MENU_ESTAGIO + "Menu de estagios");
-        System.out.println( OPCAO_MENU_CURSO_LIVRE + " Menu de Cursos Livres");
-        System.out.println(OPCAO_MENU_SAIR +"- Sair");
+        System.out.println( OPCAO_MENU_COORDENACAO + " - Menu de Coordenação");
+        System.out.println(OPCAO_MENU_ESTAGIO + " - Menu de Estágios");
+        System.out.println( OPCAO_MENU_CURSO_LIVRE + " - Menu de Cursos Livres");
+        System.out.println(OPCAO_MENU_SAIR +" - Sair");
         
         System.out.print("Digite uma opção: ");
         

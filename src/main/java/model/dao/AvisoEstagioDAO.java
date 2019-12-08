@@ -177,7 +177,7 @@ DateTimeFormatter dataFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
 	public AvisoEstagioVO consultarAvisoEstagioDAO(AvisoEstagioVO avisoEstagioVO) {
 		Connection conn = Banco.getConnection();
-		Statement stmt = (Statement) Banco.getStatement(conn);
+		Statement stmt = Banco.getStatement(conn);
 		ResultSet resultado = null;
 		AvisoEstagioVO avisoEstagio = new AvisoEstagioVO();
 		String query = "SELECT av.idaviso, ave.idavisoestagio, ave.empresa, ave.telefone, ave.email, ave.cargo, ave.jornada, ave.remuneracao, av.datacadastro, av.dataexpiracao "
@@ -200,7 +200,7 @@ DateTimeFormatter dataFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 				avisoEstagio.setDataExpiracao(LocalDate.parse(resultado.getString(10), dataFormatter));
 			}
 		} catch (SQLException e){
-			System.out.println("Erro ao executar a Query de Consulta do Aviso da estágio.");
+			System.out.println("Erro ao executar a Query de Consulta do Aviso de Estágio.");
 			System.out.println("Erro: " + e.getMessage());
 		} finally {
 			Banco.closeResultSet(resultado);
