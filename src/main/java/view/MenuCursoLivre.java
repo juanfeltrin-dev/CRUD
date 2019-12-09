@@ -157,7 +157,7 @@ public class MenuCursoLivre {
 	
 					AvisoCursoLivreVO avisoCursoLivre = controladoraAvisoCursoLivre.consultarAvisoCursoLivreController(avisoCursoLivreVO);
 					System.out.print("\n--------- RESULTADO DA CONSULTA ---------");
-					System.out.printf("\n%8d   %15d   %-50s   %-15s   %-15s   %-15s   %-15s   %-15s   %-15s   %-15s  \n", "ID AVISO", "ID AVISO CURSO LIVRE", "NOME", "PÚBLICO ALVO", "REQUISITO", "AMBIENTE", "DATA CURSO", "VALOR", "DATA CADASTRO", "DATA EXPIRAÇÃO");
+					System.out.printf("\n%8s   %15s   %-50s   %-15s   %-15s   %-15s   %-15s   %-15s   %-15s   %-15s  \n", "ID AVISO", "ID AVISO CURSO LIVRE", "NOME", "PÚBLICO ALVO", "REQUISITO", "AMBIENTE", "DATA CURSO", "VALOR", "DATA CADASTRO", "DATA EXPIRAÇÃO");
 					avisoCursoLivre.imprimir();
 					break;
 				}

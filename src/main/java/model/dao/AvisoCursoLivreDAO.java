@@ -72,12 +72,12 @@ public class AvisoCursoLivreDAO extends AvisoDAO {
 		int resultado = 0;
 		String query = "INSERT INTO avisocursolivre (idaviso, nome, publicoalvo, requisito, ambiente, datacurso, valor) VALUES (" 
 				+ idAviso
-				+ ",'" + avisoCursoLivreVO.getNome()
+				+ ", '" + avisoCursoLivreVO.getNome()
 				+ "', '" + avisoCursoLivreVO.getPublicoAlvo()
 				+ "', '" + avisoCursoLivreVO.getRequisito()
 				+ "', '" + avisoCursoLivreVO.getAmbiente()
 				+ "', '" + avisoCursoLivreVO.getDataCurso()
-				+ "', " + avisoCursoLivreVO.getValor();
+				+ "', " + avisoCursoLivreVO.getValor() + ")";
 		try {
 			resultado = stmt.executeUpdate(query);
 		} catch (SQLException e) {
@@ -188,17 +188,17 @@ public class AvisoCursoLivreDAO extends AvisoDAO {
 		try{
 			resultado = stmt.executeQuery(query);
 			if(resultado.next()){
-				avisoCursoLivreVO.setIdAviso(Integer.parseInt(resultado.getString(1)));
-				avisoCursoLivreVO.setIdAvisoCursoLivre(Integer.parseInt(resultado.getString(2)));
-				avisoCursoLivreVO.setIdUsuario(Integer.parseInt(resultado.getString(3)));
-				avisoCursoLivreVO.setNome(resultado.getString(4));
-				avisoCursoLivreVO.setPublicoAlvo(resultado.getString(5));
-				avisoCursoLivreVO.setRequisito(resultado.getString(6));
-				avisoCursoLivreVO.setAmbiente(resultado.getString(7));
-				avisoCursoLivreVO.setDataCurso(LocalDate.parse(resultado.getString(8), dataFormatter));
-				avisoCursoLivreVO.setValor(Double.parseDouble(resultado.getString(9)));
-				avisoCursoLivreVO.setDataCadastro(LocalDate.parse(resultado.getString(10), dataFormatter));
-				avisoCursoLivreVO.setDataExpiracao(LocalDate.parse(resultado.getString(11), dataFormatter));
+				avisoCursoLivre.setIdAviso(Integer.parseInt(resultado.getString(1)));
+				avisoCursoLivre.setIdAvisoCursoLivre(Integer.parseInt(resultado.getString(2)));
+				avisoCursoLivre.setIdUsuario(Integer.parseInt(resultado.getString(3)));
+				avisoCursoLivre.setNome(resultado.getString(4));
+				avisoCursoLivre.setPublicoAlvo(resultado.getString(5));
+				avisoCursoLivre.setRequisito(resultado.getString(6));
+				avisoCursoLivre.setAmbiente(resultado.getString(7));
+				avisoCursoLivre.setDataCurso(LocalDate.parse(resultado.getString(8), dataFormatter));
+				avisoCursoLivre.setValor(Double.parseDouble(resultado.getString(9)));
+				avisoCursoLivre.setDataCadastro(LocalDate.parse(resultado.getString(10), dataFormatter));
+				avisoCursoLivre.setDataExpiracao(LocalDate.parse(resultado.getString(11), dataFormatter));
 			}
 		} catch (SQLException e){
 			System.out.println("Erro ao executar a Query de Consulta do Aviso de Curso Livre.");

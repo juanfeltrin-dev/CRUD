@@ -78,8 +78,8 @@ public class AvisoEstagioVO extends AvisoVO {
 
 	public void imprimir() {
 		System.out.printf("\n%8s   %15s   %-50s   %-15s   %-15s   %-15s   %-15s   %-15s   %-15s   %-15s  \n", 
-		this.getIdAvisoEstagio(),
 		this.getIdAviso(),
+		this.getIdAvisoEstagio(),
 		this.getEmpresa(),
 		this.getTelefone(),
 		this.getEmail(),

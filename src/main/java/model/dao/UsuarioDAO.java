@@ -89,7 +89,7 @@ public class UsuarioDAO {
         Statement stmt = Banco.getStatement(conn);
         ResultSet resultado = null;
         UsuarioVO usuario = new UsuarioVO();
-        String query = "SELECT idusuario, nome, cpf, email From usuario" + usuarioVO.getIdUsuario();
+        String query = "SELECT idusuario, nome, cpf, email from usuario where idusuario = " + usuarioVO.getIdUsuario();
        
         try {
             resultado = stmt.executeQuery(query);
@@ -133,23 +133,20 @@ public class UsuarioDAO {
 
     public int atualizarUsuarioDAO(UsuarioVO usuarioVO) {
         Connection conn =  Banco.getConnection();
-        Statement stmt = Banco.getStatement(conn);
+		Statement stmt = (Statement) Banco.getStatement(conn);
         int  resultado = 0;
-        String query = "UPDATE usuario SET nome = '" + usuarioVO.getNome() + "', " + 
-                "cpf = '" + usuarioVO.getCpf() + "', "
-                + "email = '" + usuarioVO.getEmail() + "', "
-                + "idTipoUsuario = " + usuarioVO.getIdTipoUsuario() + ", " 
-                + "senha = '" + usuarioVO.getSenha() + '"'
-                + "WHERE idUsuario = " +usuarioVO.getIdUsuario() ;
+        String query = "UPDATE usuario SET nome = '" + usuarioVO.getNome() 
+                + "', cpf = '" + usuarioVO.getCpf()
+                + "', email = '" + usuarioVO.getEmail()
+                + "', idTipoUsuario = " + usuarioVO.getIdTipoUsuario() 
+                + ", senha = '" + usuarioVO.getSenha()
+                + "' WHERE idusuario = " + usuarioVO.getIdUsuario();
         try {
             resultado = stmt.executeUpdate(query);
             
         } catch (SQLException e) {
-            System.out.println("Erro ao executar a query de cadastro de usuario por CPF");
+            System.out.println("Erro ao executar a query de atualizar usuario");
             System.out.println("Erro: "+ e.getMessage());
-
- 
-
         }finally {
             Banco.closeStatement(stmt);
             Banco.closeConnection(conn);        

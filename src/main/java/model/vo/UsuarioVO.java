@@ -7,7 +7,7 @@ public class UsuarioVO extends TipoUsuarioVO {
 	private String email;
 	private String login;
 	private String senha;
-	
+
 	public UsuarioVO(int idTipoUsuario, String descricao, String acao, int idUsuario, String nome, String cpf,
 			String email, String login, String senha) {
 		super(idTipoUsuario, descricao, acao);
@@ -62,7 +62,7 @@ public class UsuarioVO extends TipoUsuarioVO {
 	
 	public void imprimir() {
         System.out.printf("%3d %-40s %-15s %-15s\n",
-                this.getIdTipoUsuario(),
+                this.getIdUsuario(),
                 this.getNome(),
                 this.getCpf(),
                 this.getEmail());

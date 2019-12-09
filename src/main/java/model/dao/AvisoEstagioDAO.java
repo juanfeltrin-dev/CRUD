@@ -216,8 +216,9 @@ DateTimeFormatter dataFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 		Statement stmt = Banco.getStatement(conn);
 		ResultSet resultado = null;
 		ArrayList<AvisoEstagioDTO> avisosEstagioDTO = new ArrayList<AvisoEstagioDTO>();
-		String query = "SELECT ave.empresa, ave.cargo, ave.jornada, ave.remuneracao, ave.telefone "
-				+ " FROM avisoestagio ave";
+		String query = "SELECT ave.empresa, ave.cargo, ave.jornada, ave.remuneracao, ave.telefone, av.datacadastro, av.dataexpiracao "
+				+ " FROM aviso av, avisoestagio ave "
+				+ "ORDER BY av.dataexpiracao DESC";
 		try{
 			resultado = stmt.executeQuery(query);
 			while(resultado.next()){
@@ -227,7 +228,8 @@ DateTimeFormatter dataFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 				avisoEstagioDTO.setJornada(resultado.getString(3));
 				avisoEstagioDTO.setRemuneracao(Double.parseDouble(resultado.getString(4)));
 				avisoEstagioDTO.setTelefone(resultado.getString(5));
-				System.out.println(avisoEstagioDTO);
+				avisoEstagioDTO.setDataCadastro(LocalDate.parse(resultado.getString(6), dataFormatter));
+				avisoEstagioDTO.setDataExpiracao(LocalDate.parse(resultado.getString(7), dataFormatter));
 				avisosEstagioDTO.add(avisoEstagioDTO);
 			}
 		} catch (SQLException e){

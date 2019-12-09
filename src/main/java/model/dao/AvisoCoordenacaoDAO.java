@@ -205,7 +205,8 @@ public class AvisoCoordenacaoDAO extends AvisoDAO{
 		ArrayList<AvisoCoordenacaoDTO> avisosCoordenacaoDTO = new ArrayList<AvisoCoordenacaoDTO>();
 		String query = "SELECT av.idaviso, avc.idavisocoordenacao, avc.descricao, av.datacadastro, av.dataexpiracao "
 				+ " FROM aviso av, avisocoordenacao avc "
-				+ " WHERE av.idaviso = avc.idaviso";
+				+ " WHERE av.idaviso = avc.idaviso "
+				+ "ORDER BY av.dataexpiracao DESC";
 		try{
 			resultado = stmt.executeQuery(query);
 			while(resultado.next()){
