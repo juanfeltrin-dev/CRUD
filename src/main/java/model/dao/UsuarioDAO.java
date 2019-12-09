@@ -132,13 +132,10 @@ public class UsuarioDAO {
 	}
 
     public int atualizarUsuarioDAO(UsuarioVO usuarioVO) {
-        Connection conn =  Banco.getConnection();
-		Statement stmt = (Statement) Banco.getStatement(conn);
+		Connection conn = Banco.getConnection();
+		Statement stmt = Banco.getStatement(conn);
         int  resultado = 0;
-        String query = "UPDATE usuario SET nome = '" + usuarioVO.getNome() 
-                + "', cpf = '" + usuarioVO.getCpf()
-                + "', email = '" + usuarioVO.getEmail()
-                + "', idTipoUsuario = " + usuarioVO.getIdTipoUsuario() 
+        String query = "UPDATE usuario SET nome = '" + usuarioVO.getNome() + "', cpf =  + '" + usuarioVO.getCpf() + "', email = '" + usuarioVO.getEmail() + "', idTipoUsuario = " + usuarioVO.getIdTipoUsuario() 
                 + ", senha = '" + usuarioVO.getSenha()
                 + "' WHERE idusuario = " + usuarioVO.getIdUsuario();
         try {
@@ -183,6 +180,25 @@ public class UsuarioDAO {
 	}
 
 	public boolean existeRegistroPorIdUsuarioDAO(int idUsuario) {
+       Connection conn =  Banco.getConnection();
+        Statement stmt = Banco.getStatement(conn);
+        ResultSet resultado = null;
+        String query = "SELECT idUsuario from usuario where idUsuario = " + idUsuario;
+		
+		try {
+			resultado = stmt.executeQuery(query);
+			if(resultado.next()) {
+				return true;
+			}
+		} catch (SQLException e) {
+			System.out.println("Erro ao executar a query que verifica a existência de usuário");
+			System.out.println("Erro: " + e.getMessage());
+			return false;
+		} finally {
+			Banco.closeResultSet(resultado);
+			Banco.closeStatement(stmt);
+			Banco.closeConnection(conn);
+		}
 		return false;
 	}
 
