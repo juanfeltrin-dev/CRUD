@@ -83,13 +83,13 @@ public class MenuEstagio {
 	}
 
 		private int apresentarOpcoesMenu(int idTipoUsuario) {
-			System.out.println("\nSistema de Avisos \n-------- Menu Avisos de Cursos Livres --------");
+			System.out.println("\nSistema de Avisos \n-------- Menu Avisos de Estágios --------");
 			System.out.println("\nOpções:");
-			System.out.println(OPCAO_MENU_CONSULTAR_AVISO_ESTAGIO_LIVRE + " - Consultar Avisos de estágios Livres");
+			System.out.println(OPCAO_MENU_CONSULTAR_AVISO_ESTAGIO_LIVRE + " - Consultar Avisos de Estágios");
 			if(idTipoUsuario == ADMINISTRADOR || idTipoUsuario == COORDENADOR || idTipoUsuario == SECRETARIA) {
-				System.out.println(OPCAO_MENU_CADASTRAR_AVISO_ESTAGIO_LIVRE + " - Cadastrar Avisos de estágios Livres");
-				System.out.println(OPCAO_MENU_ATUALIZAR_AVISO_ESTAGIO_LIVRE + " - Atualizar Avisos de estágios Livres");
-				System.out.println(OPCAO_MENU_EXCLUIR_AVISO_ESTAGIO_LIVRE + " - Excluir Avisos de estágis Livres");
+				System.out.println(OPCAO_MENU_CADASTRAR_AVISO_ESTAGIO_LIVRE + " - Cadastrar Avisos de Estágios");
+				System.out.println(OPCAO_MENU_ATUALIZAR_AVISO_ESTAGIO_LIVRE + " - Atualizar Avisos de Estágios");
+				System.out.println(OPCAO_MENU_EXCLUIR_AVISO_ESTAGIO_LIVRE + " - Excluir Avisos de Estágios");
 			}
 			System.out.println(OPCAO_MENU_AVISO_ESTAGIO_LIVRE_SAIR + " - Voltar");
 			System.out.print("\nDigite a Opção: ");
