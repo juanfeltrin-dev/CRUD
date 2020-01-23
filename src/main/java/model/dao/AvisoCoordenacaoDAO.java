@@ -7,6 +7,8 @@ import java.sql.Statement;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+
+import model.dto.AvisoCoordenacaoDTO;
 import model.vo.AvisoCoordenacaoVO;
 
 public class AvisoCoordenacaoDAO extends AvisoDAO{
@@ -193,6 +195,38 @@ public class AvisoCoordenacaoDAO extends AvisoDAO{
 			Banco.closeConnection(conn);
 		}
 		return avisoCoordenacao;
+	}
+
+
+	public ArrayList<AvisoCoordenacaoDTO> consultarRelatorioAvisoCoordenacaoDAO() {
+		Connection conn = Banco.getConnection();
+		Statement stmt = Banco.getStatement(conn);
+		ResultSet resultado = null;
+		ArrayList<AvisoCoordenacaoDTO> avisosCoordenacaoDTO = new ArrayList<AvisoCoordenacaoDTO>();
+		String query = "SELECT av.idaviso, avc.idavisocoordenacao, avc.descricao, av.datacadastro, av.dataexpiracao "
+				+ " FROM aviso av, avisocoordenacao avc "
+				+ " WHERE av.idaviso = avc.idaviso "
+				+ "ORDER BY av.dataexpiracao DESC";
+		try{
+			resultado = stmt.executeQuery(query);
+			while(resultado.next()){
+				AvisoCoordenacaoDTO avisoCoordenacaoDTO = new AvisoCoordenacaoDTO();
+				avisoCoordenacaoDTO.setIdAviso(Integer.parseInt(resultado.getString(1)));
+				avisoCoordenacaoDTO.setIdAvisoCoordenacao(Integer.parseInt(resultado.getString(2)));
+				avisoCoordenacaoDTO.setDescricao(resultado.getString(3));
+				avisoCoordenacaoDTO.setDataCadastro(LocalDate.parse(resultado.getString(4), dataFormatter));
+				avisoCoordenacaoDTO.setDataExpiracao(LocalDate.parse(resultado.getString(5), dataFormatter));
+				avisosCoordenacaoDTO.add(avisoCoordenacaoDTO);
+			}
+		} catch (SQLException e){
+			System.out.println("Erro ao executar a Query de Consulta dos Avisos da Coordenação.");
+			System.out.println("Erro: " + e.getMessage());
+		} finally {
+			Banco.closeResultSet(resultado);
+			Banco.closeStatement(stmt);
+			Banco.closeConnection(conn);
+		}
+		return avisosCoordenacaoDTO;
 	}
 	
 

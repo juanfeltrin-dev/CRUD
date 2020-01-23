@@ -14,8 +14,7 @@ public class Menu {
 
 	private static final int ADMINISTRADOR = 1;
 	private static final int COORDENADOR = 2;
-	private static final int ALUNO = 3;
-	private static final int SECRETARIA = 4;
+	private static final int ALUNO = 4;
 	
 	public void apresentarMenu(UsuarioVO usuarioVO) {
 		int opcao = this.apresentarOpcoesMenu(usuarioVO.getIdTipoUsuario());
@@ -28,7 +27,7 @@ public class Menu {
 				}
 				case 2: {
 					MenuRelatorio menuRelatorio = new MenuRelatorio();
-					menuRelatorio.apresentarMenuRelatorio();
+					menuRelatorio.apresentarMenuRelatorio(usuarioVO);
 					break;
 				}
 				case 3: {

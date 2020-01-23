@@ -1,23 +1,26 @@
 package model.vo;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class AvisoEstagioVO extends AvisoVO {
 	
+	DateTimeFormatter formataDate = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+	
 	private int idAvisoEstagio;
-	private int idAviso;
 	private String empresa;
 	private String telefone;
 	private String email;
 	private String cargo;
-	private int jornada;
+	private String jornada;
 	private double remuneracao;
 	
-	public AvisoEstagioVO(int idAvisoEstagio, int idAviso, int idUsuario, LocalDate dataCadastro, LocalDate dataExpiracao, String empresa, String telefone, String email, String cargo,
-			int jornada, double remuneracao) {
+	public AvisoEstagioVO(int idAviso, int idUsuario, LocalDate dataCadastro, LocalDate dataExpiracao,
+			DateTimeFormatter formataDate, int idAvisoEstagio, String empresa, String telefone, String email,
+			String cargo, String jornada, double remuneracao) {
 		super(idAviso, idUsuario, dataCadastro, dataExpiracao);
+		this.formataDate = formataDate;
 		this.idAvisoEstagio = idAvisoEstagio;
-		this.idAviso = idAviso;
 		this.empresa = empresa;
 		this.telefone = telefone;
 		this.email = email;
@@ -25,7 +28,7 @@ public class AvisoEstagioVO extends AvisoVO {
 		this.jornada = jornada;
 		this.remuneracao = remuneracao;
 	}
-	
+
 	public AvisoEstagioVO() {
 		super();
 	}
@@ -35,12 +38,6 @@ public class AvisoEstagioVO extends AvisoVO {
 	}
 	public void setIdAvisoEstagio(int idAvisoEstagio) {
 		this.idAvisoEstagio = idAvisoEstagio;
-	}
-	public int getIdAviso() {
-		return idAviso;
-	}
-	public void setIdAviso(int idAviso) {
-		this.idAviso = idAviso;
 	}
 	public String getEmpresa() {
 		return empresa;
@@ -66,10 +63,10 @@ public class AvisoEstagioVO extends AvisoVO {
 	public void setCargo(String cargo) {
 		this.cargo = cargo;
 	}
-	public int getJornada() {
+	public String getJornada() {
 		return jornada;
 	}
-	public void setJornada(int jornada) {
+	public void setJornada(String jornada) {
 		this.jornada = jornada;
 	}
 	public double getRemuneracao() {
@@ -77,6 +74,20 @@ public class AvisoEstagioVO extends AvisoVO {
 	}
 	public void setRemuneracao(double remuneracao) {
 		this.remuneracao = remuneracao;
+	}
+
+	public void imprimir() {
+		System.out.printf("\n%8s   %15s   %-50s   %-15s   %-15s   %-15s   %-15s   %-15s   %-15s   %-15s  \n", 
+		this.getIdAviso(),
+		this.getIdAvisoEstagio(),
+		this.getEmpresa(),
+		this.getTelefone(),
+		this.getEmail(),
+		this.getCargo(),
+		this.getJornada(),
+		this.getRemuneracao(),
+		this.getDataCadastro().format(formataDate), 
+		this.getDataExpiracao().format(formataDate));
 	}
 	
 }

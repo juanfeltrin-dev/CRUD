@@ -4,10 +4,10 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 public class AvisoCursoLivreVO extends AvisoVO {
+	
 	DateTimeFormatter formataDate = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 	
 	private int idAvisoCursoLivre;
-	private int idAviso;
 	private String nome;
 	private String publicoAlvo;
 	private String requisito;
@@ -15,11 +15,12 @@ public class AvisoCursoLivreVO extends AvisoVO {
 	private LocalDate dataCurso;
 	private double valor;
 
-	public AvisoCursoLivreVO(int idAvisoCursoLivre, int idAviso, int idUsuario, LocalDate dataCadastro, LocalDate dataExpiracao, String nome, String publicoAlvo, String requisito,
+	public AvisoCursoLivreVO(int idAviso, int idUsuario, LocalDate dataCadastro, LocalDate dataExpiracao,
+			DateTimeFormatter formataDate, int idAvisoCursoLivre, String nome, String publicoAlvo, String requisito,
 			String ambiente, LocalDate dataCurso, double valor) {
 		super(idAviso, idUsuario, dataCadastro, dataExpiracao);
+		this.formataDate = formataDate;
 		this.idAvisoCursoLivre = idAvisoCursoLivre;
-		this.idAviso = idAviso;
 		this.nome = nome;
 		this.publicoAlvo = publicoAlvo;
 		this.requisito = requisito;
@@ -40,14 +41,6 @@ public class AvisoCursoLivreVO extends AvisoVO {
 		this.idAvisoCursoLivre = idAvisoCursoLivre;
 	}
 
-	public int getIdAviso() {
-		return idAviso;
-	}
-
-	public void setIdAviso(int idAviso) {
-		this.idAviso = idAviso;
-	}
-
 	public String getNome() {
 		return nome;
 	}
@@ -59,8 +52,7 @@ public class AvisoCursoLivreVO extends AvisoVO {
 	public String getPublicoAlvo() {
 		return publicoAlvo;
 	
-	}
-	
+	}	
 
 	public void setPublicoAlvo(String publicoAlvo) {
 		this.publicoAlvo = publicoAlvo;
@@ -99,7 +91,7 @@ public class AvisoCursoLivreVO extends AvisoVO {
 	}	
 
 	public void imprimir() {
-		System.out.printf("\n%8d   %15d   %-50s   %-15s   %-15s   %-15s   %-15s   %-15s  \n", 
+		System.out.printf("\n%8s   %15s   %-50s   %-15s   %-15s   %-15s   %-15s   %-15s   %-15s   %-15s  \n", 
 				this.getIdAviso(), 
 				this.getIdAvisoCursoLivre(), 
 				this.getNome(), 
@@ -107,6 +99,8 @@ public class AvisoCursoLivreVO extends AvisoVO {
 				this.getRequisito(), 
 				this.getAmbiente(), 
 				this.getDataCurso().format(formataDate), 
-				this.getValor());
+				this.getValor(), 
+				this.getDataCadastro().format(formataDate), 
+				this.getDataExpiracao().format(formataDate));
 	}
 }

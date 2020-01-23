@@ -3,6 +3,7 @@ package controller;
 import java.util.ArrayList;
 
 import model.bo.AvisoCoordenacaoBO;
+import model.dto.AvisoCoordenacaoDTO;
 import model.vo.AvisoCoordenacaoVO;
 
 public class ControladoraAvisoCoordenacao {
@@ -30,6 +31,11 @@ public class ControladoraAvisoCoordenacao {
 	public AvisoCoordenacaoVO consultarAvisoCoordenacaoController(AvisoCoordenacaoVO avisoCoordenacaoVO) {
 		AvisoCoordenacaoBO avisoCoordenacaoBO = new AvisoCoordenacaoBO();
 		return avisoCoordenacaoBO.consultarAvisoCoordenacaoBO(avisoCoordenacaoVO);
+	}
+
+	public ArrayList<AvisoCoordenacaoDTO> consultarRelatorioAvisosCoordenacaoController() {
+		AvisoCoordenacaoBO avisoCoordenacaoBO = new AvisoCoordenacaoBO();
+		return avisoCoordenacaoBO.consultarRelatorioAvisosCoordenacaoBO();
 	}
 	
 }

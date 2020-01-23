@@ -1,26 +1,24 @@
 package model.vo;
 
-public class UsuarioVO {
+public class UsuarioVO extends TipoUsuarioVO {
 	private int idUsuario;
-	private int idTipoUsuario;
 	private String nome;
 	private String cpf;
 	private String email;
 	private String login;
 	private String senha;
-	
-	public UsuarioVO(int idUsuario, int idTipoUsuario, String nome, String cpf, String email, String login,
-			String senha) {
-		super();
+
+	public UsuarioVO(int idTipoUsuario, String descricao, String acao, int idUsuario, String nome, String cpf,
+			String email, String login, String senha) {
+		super(idTipoUsuario, descricao, acao);
 		this.idUsuario = idUsuario;
-		this.idTipoUsuario = idTipoUsuario;
 		this.nome = nome;
 		this.cpf = cpf;
 		this.email = email;
 		this.login = login;
 		this.senha = senha;
 	}
-	
+
 	public UsuarioVO() {
 		super();
 	}
@@ -30,12 +28,6 @@ public class UsuarioVO {
 	}
 	public void setIdUsuario(int idUsuario) {
 		this.idUsuario = idUsuario;
-	}
-	public int getIdTipoUsuario() {
-		return idTipoUsuario;
-	}
-	public void setIdTipoUsuario(int idTipoUsuario) {
-		this.idTipoUsuario = idTipoUsuario;
 	}
 	public String getNome() {
 		return nome;
@@ -70,7 +62,7 @@ public class UsuarioVO {
 	
 	public void imprimir() {
         System.out.printf("%3d %-40s %-15s %-15s\n",
-                this.getIdTipoUsuario(),
+                this.getIdUsuario(),
                 this.getNome(),
                 this.getCpf(),
                 this.getEmail());

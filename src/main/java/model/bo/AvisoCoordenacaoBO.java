@@ -2,6 +2,7 @@ package model.bo;
 
 import java.util.ArrayList;
 import model.dao.AvisoCoordenacaoDAO;
+import model.dto.AvisoCoordenacaoDTO;
 import model.vo.AvisoCoordenacaoVO;
 
 public class AvisoCoordenacaoBO {
@@ -64,6 +65,15 @@ public class AvisoCoordenacaoBO {
 			System.out.println("\nAviso da Coordenação não Localizado.");
 		}
 		return avisoCoordenacao;
+	}
+
+	public ArrayList<AvisoCoordenacaoDTO> consultarRelatorioAvisosCoordenacaoBO() {
+		AvisoCoordenacaoDAO avisoCoordenacaoDAO = new AvisoCoordenacaoDAO();
+		ArrayList<AvisoCoordenacaoDTO> avisoCoordenacaoDTO = avisoCoordenacaoDAO.consultarRelatorioAvisoCoordenacaoDAO();
+		if(avisoCoordenacaoDTO.isEmpty()){
+			System.out.println("\nLista de Avisos da Coordenação está vazia.");
+		}
+		return avisoCoordenacaoDTO;
 	}
 
 }

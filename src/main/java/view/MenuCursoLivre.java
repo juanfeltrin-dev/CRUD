@@ -73,18 +73,22 @@ public class MenuCursoLivre {
 	private void cadastrarAvisoCursoLivre(UsuarioVO usuarioVO) {
 		AvisoCursoLivreVO avisoCursoLivreVO = new AvisoCursoLivreVO();
 		avisoCursoLivreVO.setIdUsuario(usuarioVO.getIdUsuario());
-		System.out.print("\nDigite o Aviso da Coordenação: ");
+		System.out.print("\nDigite o nome do Curso Livre: ");
 		avisoCursoLivreVO.setNome(teclado.nextLine());
-		System.out.print("\nDigite o Aviso da Coordenação: ");
+		System.out.print("\nDigite o público alvo: ");
 		avisoCursoLivreVO.setPublicoAlvo(teclado.nextLine());
-		System.out.print("Digite a data de cadastro do Aviso da Coordenação: ");
+		System.out.print("Digite o requisito: ");
 		avisoCursoLivreVO.setRequisito(teclado.nextLine());
-		System.out.print("Digite a data de expiração do Aviso da Coordenação: ");
+		System.out.print("Digite o ambiente: ");
 		avisoCursoLivreVO.setAmbiente(teclado.nextLine());
-		System.out.print("Digite a data de cadastro do Aviso da Coordenação: ");
+		System.out.print("Digite a data do Curso Livre: ");
 		avisoCursoLivreVO.setDataCurso(LocalDate.parse(teclado.nextLine(), dataFormatter));
-		System.out.print("Digite a data de expiração do Aviso da Coordenação: ");
+		System.out.print("Digite o valor do Curso Livre: ");
 		avisoCursoLivreVO.setValor(Double.parseDouble(teclado.nextLine()));
+		System.out.print("Digite a data de cadastro do Aviso de Curso Livre: ");
+		avisoCursoLivreVO.setDataCadastro(LocalDate.parse(teclado.nextLine(), dataFormatter));
+		System.out.print("Digite a data de expiração do Aviso de Curso Livre: ");
+		avisoCursoLivreVO.setDataExpiracao(LocalDate.parse(teclado.nextLine(), dataFormatter));
 		
 		ControladoraAvisoCursoLivre controladoraAvisoCursoLivre = new ControladoraAvisoCursoLivre();
 		controladoraAvisoCursoLivre.cadastrarAvisoCursoLivreController(avisoCursoLivreVO);
@@ -95,7 +99,7 @@ public class MenuCursoLivre {
 		AvisoCursoLivreVO avisoCursoLivreVO = new AvisoCursoLivreVO();
 		System.out.print("\nInforme o código do Aviso: ");
 		avisoCursoLivreVO.setIdAviso(Integer.parseInt(teclado.nextLine()));
-		System.out.print("\nInforme o código do Aviso da Coordenacao: ");
+		System.out.print("\nInforme o código do Aviso de Curso Livre: ");
 		avisoCursoLivreVO.setIdAvisoCursoLivre(Integer.parseInt(teclado.nextLine()));
 
 		ControladoraAvisoCursoLivre controladoraAvisoCursoLivre = new ControladoraAvisoCursoLivre();
@@ -106,17 +110,21 @@ public class MenuCursoLivre {
 	private void atualizarAvisoCursoLivre(UsuarioVO usuarioVO) {
 		AvisoCursoLivreVO avisoCursoLivreVO = new AvisoCursoLivreVO();
 		avisoCursoLivreVO.setIdUsuario(usuarioVO.getIdUsuario());
-		System.out.print("\nDigite o Aviso da Coordenação: ");
+		System.out.print("\nInforme o código do Aviso: ");
+		avisoCursoLivreVO.setIdAviso(Integer.parseInt(teclado.nextLine()));
+		System.out.print("\nInforme o código do Aviso de Curso Livre: ");
+		avisoCursoLivreVO.setIdAvisoCursoLivre(Integer.parseInt(teclado.nextLine()));
+		System.out.print("\nDigite o nome do Curso Livre: ");
 		avisoCursoLivreVO.setNome(teclado.nextLine());
-		System.out.print("\nDigite o Aviso da Coordenação: ");
+		System.out.print("\nDigite o público alvo: ");
 		avisoCursoLivreVO.setPublicoAlvo(teclado.nextLine());
-		System.out.print("Digite a data de cadastro do Aviso da Coordenação: ");
+		System.out.print("Digite o requisito: ");
 		avisoCursoLivreVO.setRequisito(teclado.nextLine());
-		System.out.print("Digite a data de expiração do Aviso da Coordenação: ");
+		System.out.print("Digite o ambiente: ");
 		avisoCursoLivreVO.setAmbiente(teclado.nextLine());
-		System.out.print("Digite a data de cadastro do Aviso da Coordenação: ");
+		System.out.print("Digite a data do Curso Livre: ");
 		avisoCursoLivreVO.setDataCurso(LocalDate.parse(teclado.nextLine(), dataFormatter));
-		System.out.print("Digite a data de expiração do Aviso da Coordenação: ");
+		System.out.print("Digite o valor do Curso Livre: ");
 		avisoCursoLivreVO.setValor(Double.parseDouble(teclado.nextLine()));
 
 		ControladoraAvisoCursoLivre controladoraAvisoCursoLivre = new ControladoraAvisoCursoLivre();
@@ -133,7 +141,7 @@ public class MenuCursoLivre {
 					opcao = OPCAO_MENU_CONSULTAR_AVISO_CURSO_LIVRE_SAIR;
 					ArrayList<AvisoCursoLivreVO> listaAvisosCursoLivreVO = controladoraAvisoCursoLivre.consultarTodosAvisosCursoLivreController();
 					System.out.print("\n--------- RESULTADO DA CONSULTA ---------");
-					System.out.printf("\n%8s   %15s   %-50s   %-15s   %-15s  \n", "ID AVISO", "ID AVISO COORD.", "DESCRIÇÃO", "DATA CADASTRO", "DATA EXPIRAÇÃO");
+					System.out.printf("\n%8s   %15s   %-50s   %-15s   %-15s   %-15s   %-15s   %-15s   %-15s   %-15s  \n", "ID AVISO", "ID AVISO CURSO LIVRE", "NOME", "PÚBLICO ALVO", "REQUISITO", "AMBIENTE", "DATA CURSO", "VALOR", "DATA CADASTRO", "DATA EXPIRAÇÃO");
 					for (int i = 0; i < listaAvisosCursoLivreVO.size(); i++) {
 						listaAvisosCursoLivreVO.get(i).imprimir();
 					}
@@ -144,12 +152,12 @@ public class MenuCursoLivre {
 					AvisoCursoLivreVO avisoCursoLivreVO = new AvisoCursoLivreVO();
 					System.out.print("\nInforme o código do Aviso: ");
 					avisoCursoLivreVO.setIdAviso(Integer.parseInt(teclado.nextLine()));
-					System.out.print("\nInforme o código do Aviso da Coordenação: ");
+					System.out.print("\nInforme o código do Aviso do Curso Livre: ");
 					avisoCursoLivreVO.setIdAvisoCursoLivre(Integer.parseInt(teclado.nextLine()));
 	
 					AvisoCursoLivreVO avisoCursoLivre = controladoraAvisoCursoLivre.consultarAvisoCursoLivreController(avisoCursoLivreVO);
 					System.out.print("\n--------- RESULTADO DA CONSULTA ---------");
-					System.out.printf("\n%8s   %15s   %-50s   %-15s   %-15s   %-15s   %-15s   %-15s  \n", "ID AVISO", "ID AVISO COORD.", "NOME", "PÚBLICO ALVO", "REQUISITO", "AMBIENTE", "DATA CURSO", "VALOR");
+					System.out.printf("\n%8s   %15s   %-50s   %-15s   %-15s   %-15s   %-15s   %-15s   %-15s   %-15s  \n", "ID AVISO", "ID AVISO CURSO LIVRE", "NOME", "PÚBLICO ALVO", "REQUISITO", "AMBIENTE", "DATA CURSO", "VALOR", "DATA CADASTRO", "DATA EXPIRAÇÃO");
 					avisoCursoLivre.imprimir();
 					break;
 				}
@@ -163,8 +171,8 @@ public class MenuCursoLivre {
 
 	private int apresentarOpcoesConsulta() {
 		System.out.println("\nInforme o tipo de consulta a ser realizada");
-		System.out.println(OPCAO_MENU_CONSULTAR_TODOS_AVISOS_CURSO_LIVRE + " - Consultar todos os Avisos da Coordenação");
-		System.out.println(OPCAO_MENU_CONSULTAR_UM_AVISO_CURSO_LIVRE + " - Consultar um Aviso da Coordenação Específico");
+		System.out.println(OPCAO_MENU_CONSULTAR_TODOS_AVISOS_CURSO_LIVRE + " - Consultar todos os Avisos de Curso Livre");
+		System.out.println(OPCAO_MENU_CONSULTAR_UM_AVISO_CURSO_LIVRE + " - Consultar um Aviso de Curso Livre Específico");
 		System.out.println(OPCAO_MENU_CONSULTAR_AVISO_CURSO_LIVRE_SAIR + " - Voltar");
 		System.out.print("\nDigite a Opção: ");
 		return Integer.parseInt(teclado.nextLine());

@@ -4,8 +4,11 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
+import model.dto.AvisoCoordenacaoDTO;
+import model.dto.UsuarioDTO;
 import model.vo.TipoUsuarioVO;
 import model.vo.UsuarioVO;
 
@@ -86,7 +89,7 @@ public class UsuarioDAO {
         Statement stmt = Banco.getStatement(conn);
         ResultSet resultado = null;
         UsuarioVO usuario = new UsuarioVO();
-        String query = "SELECT idusuario, nome, cpf, email From usuario" + usuarioVO.getIdUsuario();
+        String query = "SELECT idusuario, nome, cpf, email from usuario where idusuario = " + usuarioVO.getIdUsuario();
        
         try {
             resultado = stmt.executeQuery(query);
@@ -129,24 +132,18 @@ public class UsuarioDAO {
 	}
 
     public int atualizarUsuarioDAO(UsuarioVO usuarioVO) {
-        Connection conn =  Banco.getConnection();
-        Statement stmt = Banco.getStatement(conn);
+		Connection conn = Banco.getConnection();
+		Statement stmt = Banco.getStatement(conn);
         int  resultado = 0;
-        String query = "UPDATE usuario SET nome = '" + usuarioVO.getNome() + "', " + 
-                "cpf = '" + usuarioVO.getCpf() + "', "
-                + "email = '" + usuarioVO.getEmail() + "', "
-                + "idTipoUsuario = " + usuarioVO.getIdTipoUsuario() + ", " 
-                + "senha = '" + usuarioVO.getSenha() + '"'
-                + "WHERE idUsuario = " +usuarioVO.getIdUsuario() ;
+        String query = "UPDATE usuario SET nome = '" + usuarioVO.getNome() + "', cpf =  + '" + usuarioVO.getCpf() + "', email = '" + usuarioVO.getEmail() + "', idTipoUsuario = " + usuarioVO.getIdTipoUsuario() 
+                + ", senha = '" + usuarioVO.getSenha()
+                + "' WHERE idusuario = " + usuarioVO.getIdUsuario();
         try {
             resultado = stmt.executeUpdate(query);
             
         } catch (SQLException e) {
-            System.out.println("Erro ao executar a query de cadastro de usuario por CPF");
+            System.out.println("Erro ao executar a query de atualizar usuario");
             System.out.println("Erro: "+ e.getMessage());
-
- 
-
         }finally {
             Banco.closeStatement(stmt);
             Banco.closeConnection(conn);        
@@ -183,6 +180,25 @@ public class UsuarioDAO {
 	}
 
 	public boolean existeRegistroPorIdUsuarioDAO(int idUsuario) {
+       Connection conn =  Banco.getConnection();
+        Statement stmt = Banco.getStatement(conn);
+        ResultSet resultado = null;
+        String query = "SELECT idUsuario from usuario where idUsuario = " + idUsuario;
+		
+		try {
+			resultado = stmt.executeQuery(query);
+			if(resultado.next()) {
+				return true;
+			}
+		} catch (SQLException e) {
+			System.out.println("Erro ao executar a query que verifica a existência de usuário");
+			System.out.println("Erro: " + e.getMessage());
+			return false;
+		} finally {
+			Banco.closeResultSet(resultado);
+			Banco.closeStatement(stmt);
+			Banco.closeConnection(conn);
+		}
 		return false;
 	}
 
@@ -211,6 +227,35 @@ public class UsuarioDAO {
 	            Banco.closeConnection(conn);
 	        }
 		return lista;
+	}
+
+	public static ArrayList<UsuarioDTO> consultarRelatorioUsuariosDAO() {
+		Connection conn = Banco.getConnection();
+		Statement stmt = Banco.getStatement(conn);
+		ResultSet resultado = null;
+		ArrayList<UsuarioDTO> usuariosDTO = new ArrayList<UsuarioDTO>();
+		String query = "SELECT u.nome, u.email, u.login, t.descricao, t.acao "
+				+ " FROM usuario u, tipousuario t where u.IDTIPOUSUARIO = t.IDTIPOUSUARIO";
+		try{
+			resultado = stmt.executeQuery(query);
+			while(resultado.next()){
+				UsuarioDTO usuarioDTO = new UsuarioDTO();
+				usuarioDTO.setNome(resultado.getString(1));
+				usuarioDTO.setEmail(resultado.getString(2));
+				usuarioDTO.setLogin(resultado.getString(3));
+				usuarioDTO.setTipoUsuario(resultado.getString(4));
+				usuarioDTO.setAcao(resultado.getString(5));
+				usuariosDTO.add(usuarioDTO);
+			}
+		} catch (SQLException e){
+			System.out.println("Erro ao executar a Query de Consulta dos Avisos da Coordenação.");
+			System.out.println("Erro: " + e.getMessage());
+		} finally {
+			Banco.closeResultSet(resultado);
+			Banco.closeStatement(stmt);
+			Banco.closeConnection(conn);
+		}
+		return usuariosDTO;
 	}
 
 }

@@ -2,9 +2,11 @@ package controller;
 
 import java.util.ArrayList;
 
+import model.bo.AvisoEstagioLivreBO;
 import model.bo.UsuarioBO;
 import model.vo.TipoUsuarioVO;
 import model.vo.UsuarioVO;
+import model.dto.UsuarioDTO;
 
 public class ControladoraUsuario {
 
@@ -41,6 +43,11 @@ public class ControladoraUsuario {
 	public ArrayList<TipoUsuarioVO> consultarTipoUsuario() {
 		UsuarioBO usuarioBO = new UsuarioBO();
 		return usuarioBO.consultarTipoUsuarioBO();
+	}
+
+	public ArrayList<UsuarioDTO> consultarRelatorioUsuariosController() {
+		UsuarioBO usuarioBO = new UsuarioBO();
+		return usuarioBO.consultarRelatorioUsuariosBO();
 	}
 	
 	
